@@ -10,7 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -19,12 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private Button boutonRouge;
     private Button boutonVert;
     private Button boutonBleu;
-    private Button boutonLed;
-    private Button boutonRainbow;
-    private Button boutonAnneau;
-    private Button boutonBranche;
     private Button boutonWipe;
-    private TextInputEditText inputLed;
+    private CheckBox boule1,boule2,boule3,boule4,boule5,boule6,boule7,boule8,boule9;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,53 +55,87 @@ public class MainActivity extends AppCompatActivity {
         boutonRouge = (Button)findViewById(R.id.boutonRouge);
         boutonVert = (Button)findViewById(R.id.boutonVert);
         boutonBleu = (Button)findViewById(R.id.boutonBleu);
-        boutonLed = (Button)findViewById(R.id.boutonLed);
-        boutonRainbow = (Button)findViewById(R.id.boutonRainbow);
-        boutonAnneau = (Button)findViewById(R.id.boutonAnneau);
-        boutonBranche = (Button)findViewById(R.id.boutonBranche);
         boutonWipe = (Button)findViewById(R.id.boutonWipe);
-        inputLed = (TextInputEditText)findViewById(R.id.inputLed);
+        boule1 = (CheckBox)findViewById(R.id.checkBox);
+        boule2 = (CheckBox)findViewById(R.id.checkBox10);
+        boule3 = (CheckBox)findViewById(R.id.checkBox11);
+        boule4 = (CheckBox)findViewById(R.id.checkBox12);
+        boule5 = (CheckBox)findViewById(R.id.checkBox13);
+        boule6 = (CheckBox)findViewById(R.id.checkBox14);
+        boule7 = (CheckBox)findViewById(R.id.checkBox15);
+        boule8 = (CheckBox)findViewById(R.id.checkBox16);
+        boule9 = (CheckBox)findViewById(R.id.checkBox17);
+        final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
+
+
+
+
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.subscribe_status_advertise();
-                mqttService.advertise();
+                mqttService.fill(255,0,0);
+                System.out.print("ROUGE !!");
             }
         });
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+               mqttService.fill(0,255,0);
+               System.out.print("VERT !!");
             }
         });
         boutonBleu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-            }
-        });
-        boutonLed.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mqttService.set_pixel(9,255,0,0);
+                mqttService.fill(0,0,255);
+                System.out.print("BLEU !!");
             }
         });
         boutonWipe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+                mqttService.set_pixel(0,255,0,0);
+                mqttService.set_pixel(1,255,23,0);
+                mqttService.set_pixel(2,255,46,0);
+                mqttService.set_pixel(9,255,69,0);
+                mqttService.set_pixel(3,255,92,0);
+                mqttService.set_pixel(4,255,115,0);
+                mqttService.set_pixel(5,255,138,0);
+                mqttService.set_pixel(6,255,161,0);
+                mqttService.set_pixel(7,255,184,0);
+                mqttService.set_pixel(8,255,207,0);
+                mqttService.set_pixel(9,255,230,0);
+                mqttService.set_pixel(10,255,240,0);
+                mqttService.set_pixel(11,255,255,0);
+                mqttService.set_pixel(12,255,255,0);
+
+                mqttService.set_pixel(0,0,0,0);
+                mqttService.set_pixel(1,0,0,0);
+                mqttService.set_pixel(2,0,0,0);
+                mqttService.set_pixel(9,0,0,0);
+                mqttService.set_pixel(3,0,0,0);
+                mqttService.set_pixel(4,0,0,0);
+                mqttService.set_pixel(5,0,0,0);
+                mqttService.set_pixel(6,0,0,0);
+                mqttService.set_pixel(7,0,0,0);
+                mqttService.set_pixel(8,0,0,0);
+                mqttService.set_pixel(9,0,0,0);
+                mqttService.set_pixel(10,0,0,0);
+                mqttService.set_pixel(11,0,0,0);
+                mqttService.set_pixel(12,0,0,0);
+
             }
         });
-        boutonRainbow.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+        boule1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(boule1.isChecked()){
+                    listeBouleCheckees.add("");
+                }
+                if(!boule1.isChecked()){
+                    listeBouleCheckees.remove("");
+                    mqttService.fill(0,0,0);
+                }
+
             }
         });
-        boutonAnneau.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-            }
-        });
-        boutonBranche.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-            }
-        });
+
 
 
 

@@ -1,7 +1,8 @@
 package com.ensim.a24h;
 
-import com.google.gson.JsonObject;
+import android.util.Log;
 
+import com.google.gson.JsonObject;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -10,6 +11,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
@@ -270,19 +272,40 @@ public class MqttServices {
     }
 
     void subscribe_atmosphere_humidite_absolue() {
-        String topic = "atmosphere/humidite_absolue";
-
-
-    }
-
-    void subscribe_status_advertise() {
-        String topic = "laumio/status/discover";
+        String topic = "distance/value";
         MqttClient sampleClient = this.connection();
         if (sampleClient != null) {
 
             try {
                 sampleClient.subscribeWithResponse(topic);
-                System.out.println(sampleClient.subscribeWithResponse(topic));
+                System.out.println(sampleClient.subscribeWithResponse(topic).toString());
+                Log.d("humidite", "subscribe_status_advertise: " + sampleClient.subscribeWithResponse(topic).getResponse().getPayload().toString());
+                try {
+                    String value = new String( sampleClient.subscribeWithResponse(topic).getResponse().getPayload(), "ISO-8859-1");
+                    Log.d("humidite", "subscribe_status_advertise convertion : " + value);
+
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+    }
+
+    void subscribe_status_advertise() {
+        String topic = "distance/value";
+        MqttClient sampleClient = this.connection();
+        if (sampleClient != null) {
+
+            try {
+                byte[] bytes = sampleClient.subscribeWithResponse(topic).getResponse().getPayload();
+                String s = new String(bytes);
+                System.out.println(sampleClient.subscribeWithResponse(topic).getMessageId());
+                Log.d("discover", "subscribe_status_advertise: " +  sampleClient.subscribeWithResponse(topic).getResponse().getPayload() + "decrypt : " + s);
             } catch (MqttException e) {
                 e.printStackTrace();
             }

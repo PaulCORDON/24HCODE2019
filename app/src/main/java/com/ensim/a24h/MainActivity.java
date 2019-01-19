@@ -72,12 +72,14 @@ public class MainActivity extends AppCompatActivity {
 
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.set_pixel("Laumio_0FBFBF",9,255,0,0);
+               // mqttService.set_pixel("Laumio_0FBFBF",9,255,0,0);
+                mqttService.subscribe_atmosphere_humidite_absolue();
             }
         });
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.set_pixel("Laumio_107DA8",9,0,255,0);
+               // mqttService.set_pixel("Laumio_107DA8",9,0,255,0);
+                mqttService.subscribe_status_advertise();
             }
         });
         boutonBleu.setOnClickListener(new View.OnClickListener() {
@@ -85,21 +87,17 @@ public class MainActivity extends AppCompatActivity {
                 mqttService.set_pixel("Laumio_107DA8",9,0,0,255);
             }
         });
-        boutonLed.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
 
-            }
-        });
         boutonWipe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                mqttService.color_wipe("Laumio_88813D",255,0,0,3000);
             }
         });
-        boutonRainbow.setOnClickListener(new View.OnClickListener() {
+       /* boutonRainbow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mqttService.animate_rainbow("Laumio_CD0522");
             }
-        });
+        });*/
 
 
 

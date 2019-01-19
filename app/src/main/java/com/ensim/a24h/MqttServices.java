@@ -71,8 +71,8 @@ public class MqttServices {
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
                 System.out.println("Message published");
-                sampleClient.disconnect();
-                System.out.println("Disconnected");
+               // sampleClient.disconnect();
+                //System.out.println("Disconnected");
                 //System.exit(0);
             } catch (MqttException me) {
                 System.out.println("reason " + me.getReasonCode());
@@ -242,7 +242,7 @@ public class MqttServices {
     }
 
     void subscribe_status_advertise() {
-        String topic = "laumio/status/advertise";
+        String topic = "laumio/status/discover";
         MqttClient sampleClient = this.connection();
         if (sampleClient != null) {
 

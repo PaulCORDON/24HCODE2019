@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+<<<<<<< HEAD
         String topic        = "laumio/all/animate_rainbow";
         String content      = "";
         int qos             = 2;
@@ -134,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+=======
+>>>>>>> master
     }
 
 }

@@ -3,6 +3,7 @@ package com.ensim.a24h;
 import com.google.gson.JsonObject;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -32,6 +33,7 @@ public class MqttServices {
             return null;
         }
     }
+
 
 
     void advertise(){
@@ -274,7 +276,6 @@ public class MqttServices {
         String topic = "laumio/status/discover";
         MqttClient sampleClient = this.connection();
         if (sampleClient != null) {
-
            sampleClient.setCallback(new MqttCallback() {
                 @Override
                 public void connectionLost(Throwable cause) {
@@ -299,5 +300,8 @@ public class MqttServices {
 
 
         }
+    }
+    private void subscribeToTopic() {
+
     }
 }

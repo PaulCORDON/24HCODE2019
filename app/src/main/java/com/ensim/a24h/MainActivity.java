@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
 
         boule1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

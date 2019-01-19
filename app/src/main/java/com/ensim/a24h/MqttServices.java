@@ -1,8 +1,28 @@
 package com.ensim.a24h;
 
-public class MqttServices {
-    void set_pixel(int numLed, int r, int v, int b) {
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+public class MqttServices {
+
+    MqttClient connection(){
+        String broker       = "tcp://mpd.lan:1883";
+        String clientId     = "POLO";
+        MemoryPersistence persistence = new MemoryPersistence();
+        try {
+            MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+            return sampleClient;
+        } catch (MqttException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    void set_pixel(int numLed, int r, int v, int b) {
+       
     }
 
     /*Change la couleur d’un anneau.

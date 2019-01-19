@@ -1,5 +1,7 @@
 package com.ensim.a24h;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -8,15 +10,15 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class MqttServices {
 
-    MqttClient connection(){
-        String broker       = "tcp://mpd.lan:1883";
-        String clientId     = "POLO";
+    MqttClient connection() {
+        String broker = "tcp://mpd.lan:1883";
+        String clientId = "POLO";
         MemoryPersistence persistence = new MemoryPersistence();
         try {
             MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
-            System.out.println("Connecting to broker: "+broker);
+            System.out.println("Connecting to broker: " + broker);
             sampleClient.connect(connOpts);
             System.out.println("Connected");
             return sampleClient;
@@ -72,12 +74,12 @@ public class MqttServices {
                 sampleClient.disconnect();
                 System.out.println("Disconnected");
                 //System.exit(0);
-            } catch(MqttException me) {
-                System.out.println("reason "+me.getReasonCode());
-                System.out.println("msg "+me.getMessage());
-                System.out.println("loc "+me.getLocalizedMessage());
-                System.out.println("cause "+me.getCause());
-                System.out.println("excep "+me);
+            } catch (MqttException me) {
+                System.out.println("reason " + me.getReasonCode());
+                System.out.println("msg " + me.getMessage());
+                System.out.println("loc " + me.getLocalizedMessage());
+                System.out.println("cause " + me.getCause());
+                System.out.println("excep " + me);
                 me.printStackTrace();
             }
         }
@@ -191,7 +193,6 @@ public class MqttServices {
     }
 
 
-
     // !!!!!!!!!!!Fonctions pour les capteurs!!!!!!!!!!!!!!!!!!
 
     //Fonction pour la telecommande
@@ -235,6 +236,39 @@ public class MqttServices {
     }
 
     void subscribe_atmosphere_humidite_absolue() {
+        String topic = "atmosphere/humidite_absolue";
 
+
+    }
+
+    void subscribe_status_advertise() {
+        String topic = "laumio/status/advertise";
+        MqttClient sampleClient = this.connection();
+        if (sampleClient != null) {
+
+           sampleClient.setCallback(new MqttCallback() {
+                @Override
+                public void connectionLost(Throwable cause) {
+                   // msg("Connection lost...");
+                    System.out.println("Connexion perdue");
+
+                }
+
+                @Override
+                public void messageArrived(String topic, MqttMessage message) throws Exception {
+                   // TextView tvMessage = (TextView) findViewById(R.id.tvMessage);
+                    //tvMessage.setText(message.toString());
+                    System.out.println(message.toString());
+                }
+
+                @Override
+                public void deliveryComplete(IMqttDeliveryToken token) {
+                    System.out.println("Message delivre");
+
+                }
+            });
+
+
+        }
     }
 }

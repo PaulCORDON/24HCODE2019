@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });*/
+        });
 
         boule1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule1.isChecked()){
                     listeBouleCheckees.remove("Laumio_1D9486");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_1D9486",0,0,0);
                 }
 
             }
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule2.isChecked()){
                     listeBouleCheckees.remove("Laumio_104A13");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_104A13",0,0,0);
                 }
 
             }
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule3.isChecked()){
                     listeBouleCheckees.remove("Laumio_104F03");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_104F03",0,0,0);
                 }
 
             }
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule4.isChecked()){
                     listeBouleCheckees.remove("Laumio_10508F");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_10508F",0,0,0);
                 }
 
             }
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule5.isChecked()){
                     listeBouleCheckees.remove("Laumio_0FBFBF");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_0FBFBF",0,0,0);
                 }
 
             }
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule6.isChecked()){
                     listeBouleCheckees.remove("Laumio_10805F");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_10805F",0,0,0);
                 }
 
             }
@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule7.isChecked()){
                     listeBouleCheckees.remove("Laumio_CD0522");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_CD0522",0,0,0);
                 }
 
             }
@@ -251,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule8.isChecked()){
                     listeBouleCheckees.remove("Laumio_0FC168");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_0FC168",0,0,0);
                 }
 
             }
@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if(!boule9.isChecked()){
                     listeBouleCheckees.remove("Laumio_D454DB");
-                    mqttService.fill(0,0,0);
+                    mqttService.fill("Laumio_D454DB",0,0,0);
                 }
 
             }

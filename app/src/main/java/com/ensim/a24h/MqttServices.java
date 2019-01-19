@@ -30,7 +30,7 @@ public class MqttServices {
 
 
     void advertise(){
-        String topic        = "laumio/all/set_pixel";
+        String topic        = "laumio/all/advertise";
         String content      = "";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
@@ -58,7 +58,7 @@ public class MqttServices {
     }
 
     void set_pixel(int numLed, int r, int v, int b) {
-        String topic        = "laumio/all/set_pixel";
+        String topic        = "laumio/all/json";
 
         int qos             = 2;
         MqttClient sampleClient = this.connection();
@@ -90,7 +90,7 @@ public class MqttServices {
     Les 4 octets du message sont le numéro de l’anneau
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
     void set_ring(int numAnneau, int r, int v, int b) {
-        String topic        = "laumio/all/set_ring";
+        String topic        = "laumio/all/json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
@@ -119,7 +119,7 @@ public class MqttServices {
     Les 4 octets du message sont le numéro de la colonne
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
     void set_column(int numCol, int r, int v, int b) {
-        String topic        = "laumio/all/set_column";
+        String topic        = "laumio/all/json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
@@ -149,7 +149,7 @@ public class MqttServices {
     Les 4 octets du message sont les composantes rouge, vert, bleu de la couleur (0 à 255)
     suivies de la durée.*/
     void color_wipe(int r, int v, int b, int duree) {
-        String topic        = "laumio/all/color_wipe";
+        String topic        = "laumio/all/json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){

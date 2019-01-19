@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
         inputLed = (TextInputEditText)findViewById(R.id.inputLed);
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+                mqttService.subscribe_status_advertise();
+                mqttService.advertise();
             }
         });
         boutonVert.setOnClickListener(new View.OnClickListener() {

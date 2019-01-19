@@ -78,14 +78,12 @@ public class MainActivity extends AppCompatActivity {
         });
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               mqttService.fill(0,255,0);
-               System.out.print("VERT !!");
+                mqttService.set_pixel(9,0,255,0);
             }
         });
         boutonBleu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.fill(0,0,255);
-                System.out.print("BLEU !!");
+                mqttService.set_pixel(9,0,0,255);
             }
         });
         boutonWipe.setOnClickListener(new View.OnClickListener() {

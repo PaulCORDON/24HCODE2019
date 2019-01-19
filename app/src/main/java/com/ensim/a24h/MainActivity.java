@@ -3,35 +3,28 @@ package com.ensim.a24h;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.eclipse.paho.client.mqttv3.IMqttClient;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-
-import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private Button boutonRouge = (Button)findViewById(R.id.boutonRouge);
-    private Button boutonVert = (Button)findViewById(R.id.boutonVert);
-    private Button boutonBleu = (Button)findViewById(R.id.boutonBleu);
-    private Button boutonLed = (Button)findViewById(R.id.boutonLed);
-    private Button boutonRainbow = (Button)findViewById(R.id.boutonRainbow);
-    private Button boutonAnneau = (Button)findViewById(R.id.boutonAnneau);
-    private Button boutonBranche = (Button)findViewById(R.id.boutonBranche);
-    private Button boutonWipe = (Button)findViewById(R.id.boutonWipe);
-    private TextInputLayout inputLed = (TextInputLayout)findViewById(R.id.inputLed);
+    private Button boutonRouge;
+    private Button boutonVert;
+    private Button boutonBleu;
+    private Button boutonLed;
+    private Button boutonRainbow;
+    private Button boutonAnneau;
+    private Button boutonBranche;
+    private Button boutonWipe;
+    private TextInputEditText inputLed;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -58,7 +51,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final MqttServices mqttService = new MqttServices();
-        
+        boutonRouge = (Button)findViewById(R.id.boutonRouge);
+        boutonVert = (Button)findViewById(R.id.boutonVert);
+        boutonBleu = (Button)findViewById(R.id.boutonBleu);
+        boutonLed = (Button)findViewById(R.id.boutonLed);
+        boutonRainbow = (Button)findViewById(R.id.boutonRainbow);
+        boutonAnneau = (Button)findViewById(R.id.boutonAnneau);
+        boutonBranche = (Button)findViewById(R.id.boutonBranche);
+        boutonWipe = (Button)findViewById(R.id.boutonWipe);
+        inputLed = (TextInputEditText)findViewById(R.id.inputLed);
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button

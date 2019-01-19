@@ -28,18 +28,45 @@ public class MqttServices {
         }
     }
 
-    void set_pixel(int numLed, int r, int v, int b) {
-        String topic = "laumio/all/set_pixel";
-        String content = "";
-        int qos = 2;
+
+    void advertise(){
+        String topic        = "laumio/all/set_pixel";
+        String content      = "";
+        int qos             = 2;
         MqttClient sampleClient = this.connection();
-        if (sampleClient != null) {
+        if(sampleClient!=null) {
             try {
-
                 System.out.println("Publishing message: " + content);
-
                 MqttMessage message = new MqttMessage();
-                String msg = "{'command': 'set_ring','led': " + numLed + ",rgb': [" + r + "," + v + ", " + b + "]}";
+                String msg = "laumio/status/discover";
+                message.setPayload(msg.getBytes());
+                message.setQos(qos);
+                sampleClient.publish(topic, message);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                //System.exit(0);
+            } catch (MqttException me) {
+                System.out.println("reason " + me.getReasonCode());
+                System.out.println("msg " + me.getMessage());
+                System.out.println("loc " + me.getLocalizedMessage());
+                System.out.println("cause " + me.getCause());
+                System.out.println("excep " + me);
+                me.printStackTrace();
+            }
+        }
+    }
+
+    void set_pixel(int numLed, int r, int v, int b) {
+        String topic        = "laumio/all/set_pixel";
+
+        int qos             = 2;
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null){
+            try {
+                MqttMessage message = new MqttMessage();
+                String msg = "{'command': 'set_pixel','led': "+numLed+",rgb': ["+r+","+v+", "+b+"]}";
+                System.out.println("Publishing message: "+msg);
                 message.setPayload(msg.getBytes());
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
@@ -63,21 +90,89 @@ public class MqttServices {
     Les 4 octets du message sont le numéro de l’anneau
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
     void set_ring(int numAnneau, int r, int v, int b) {
-
+        String topic        = "laumio/all/set_ring";
+        int qos             = 2;
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null){
+            try {
+                MqttMessage message = new MqttMessage();
+                String msg = "{'command': 'set_ring','ring': "+numAnneau+",rgb': ["+r+","+v+", "+b+"]}";
+                System.out.println("Publishing message: "+msg);
+                message.setPayload(msg.getBytes());
+                message.setQos(qos);
+                sampleClient.publish(topic, message);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+            } catch(MqttException me) {
+                System.out.println("reason "+me.getReasonCode());
+                System.out.println("msg "+me.getMessage());
+                System.out.println("loc "+me.getLocalizedMessage());
+                System.out.println("cause "+me.getCause());
+                System.out.println("excep "+me);
+                me.printStackTrace();
+            }
+        }
     }
 
     /*Change la couleur d’une colonne.
     Les 4 octets du message sont le numéro de la colonne
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
     void set_column(int numCol, int r, int v, int b) {
-
+        String topic        = "laumio/all/set_column";
+        int qos             = 2;
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null){
+            try {
+                MqttMessage message = new MqttMessage();
+                String msg = "{'command': 'set_column','column': "+numCol+",rgb': ["+r+","+v+", "+b+"]}";
+                message.setPayload(msg.getBytes());
+                System.out.println("Publishing message: "+msg);
+                message.setQos(qos);
+                sampleClient.publish(topic, message);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                //System.exit(0);
+            } catch(MqttException me) {
+                System.out.println("reason "+me.getReasonCode());
+                System.out.println("msg "+me.getMessage());
+                System.out.println("loc "+me.getLocalizedMessage());
+                System.out.println("cause "+me.getCause());
+                System.out.println("excep "+me);
+                me.printStackTrace();
+            }
+        }
     }
 
     /*Démarre l’animation de remplissage progressif avec une couleur et une durée.
     Les 4 octets du message sont les composantes rouge, vert, bleu de la couleur (0 à 255)
     suivies de la durée.*/
     void color_wipe(int r, int v, int b, int duree) {
-
+        String topic        = "laumio/all/color_wipe";
+        int qos             = 2;
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null){
+            try {
+                MqttMessage message = new MqttMessage();
+                String msg = "{'command': 'color_wipe','duration':"+duree+",'rgb': ["+r+","+v+","+b+"]}";
+                message.setPayload(msg.getBytes());
+                System.out.println("Publishing message: "+msg);
+                message.setQos(qos);
+                sampleClient.publish(topic, message);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                //System.exit(0);
+            } catch(MqttException me) {
+                System.out.println("reason "+me.getReasonCode());
+                System.out.println("msg "+me.getMessage());
+                System.out.println("loc "+me.getLocalizedMessage());
+                System.out.println("cause "+me.getCause());
+                System.out.println("excep "+me);
+                me.printStackTrace();
+            }
+        }
     }
 
     // Démarre l’animation arc-en - ciel.

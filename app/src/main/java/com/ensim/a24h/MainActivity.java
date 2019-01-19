@@ -68,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
         });
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+                mqttService.set_pixel(9,0,255,0);
             }
         });
         boutonBleu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+                mqttService.set_pixel(9,0,0,255);
             }
         });
         boutonLed.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         });
         boutonRainbow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+                mqttService.animate_rainbow();
             }
         });
         boutonAnneau.setOnClickListener(new View.OnClickListener() {

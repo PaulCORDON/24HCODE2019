@@ -1,5 +1,7 @@
 package com.ensim.a24h;
 
+import com.google.gson.JsonObject;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -7,6 +9,9 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 
 public class MqttServices {
 
@@ -31,12 +36,10 @@ public class MqttServices {
 
     void advertise(){
         String topic        = "laumio/all/advertise";
-        String content      = "";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null) {
             try {
-                System.out.println("Publishing message: " + content);
                 MqttMessage message = new MqttMessage();
                 String msg = "laumio/status/discover";
                 message.setPayload(msg.getBytes());
@@ -178,7 +181,33 @@ public class MqttServices {
     // Démarre l’animation arc-en - ciel.
     // Le contenu du message est ignoré.
     void animate_rainbow() {
+        String topic        = "laumio/Laumio_0FBFBF/json";
+        int qos             = 2;
 
+        JsonObject event = new JsonObject();
+        event.addProperty("command", "animate_rainbow");
+        System.out.println("Published Message: " + event.toString());
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null){
+            try {
+                MqttMessage message = new MqttMessage();
+                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
+                message.setQos(qos);
+                sampleClient.publish(topic, message);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                //System.exit(0);
+            } catch(MqttException me) {
+                System.out.println("reason "+me.getReasonCode());
+                System.out.println("msg "+me.getMessage());
+                System.out.println("loc "+me.getLocalizedMessage());
+                System.out.println("cause "+me.getCause());
+                System.out.println("excep "+me);
+                me.printStackTrace();
+            }
+        }
     }
 
     // Change la couleur de toutes les leds.

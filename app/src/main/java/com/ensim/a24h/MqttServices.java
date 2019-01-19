@@ -60,9 +60,8 @@ public class MqttServices {
         }
     }
 
-    void set_pixel(int numLed, int r, int v, int b) {
-        String topic        = "laumio/all/json";
-
+    void set_pixel(String nomLaumio, int numLed, int r, int v, int b) {
+        String topic        = "laumio/+"+nomLaumio+"+/json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
@@ -92,8 +91,8 @@ public class MqttServices {
     /*Change la couleur d’un anneau.
     Les 4 octets du message sont le numéro de l’anneau
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
-    void set_ring(int numAnneau, int r, int v, int b) {
-        String topic        = "laumio/all/json";
+    void set_ring(String nomLaumio, int numAnneau, int r, int v, int b) {
+        String topic        = "laumio/+"+nomLaumio+"+/json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
@@ -121,8 +120,8 @@ public class MqttServices {
     /*Change la couleur d’une colonne.
     Les 4 octets du message sont le numéro de la colonne
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
-    void set_column(int numCol, int r, int v, int b) {
-        String topic        = "laumio/all/json";
+    void set_column(String nomLaumio,int numCol, int r, int v, int b) {
+        String topic        = "laumio/+"+nomLaumio+"+json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
@@ -151,16 +150,21 @@ public class MqttServices {
     /*Démarre l’animation de remplissage progressif avec une couleur et une durée.
     Les 4 octets du message sont les composantes rouge, vert, bleu de la couleur (0 à 255)
     suivies de la durée.*/
-    void color_wipe(int r, int v, int b, int duree) {
-        String topic        = "laumio/all/json";
+    void color_wipe(String nomLaumio,int r, int v, int b, int duree) {
+        String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
                 MqttMessage message = new MqttMessage();
-                String msg = "{'command': 'color_wipe','duration':"+duree+",'rgb': ["+r+","+v+","+b+"]}";
-                message.setPayload(msg.getBytes());
-                System.out.println("Publishing message: "+msg);
+                JsonObject event = new JsonObject();
+                event.addProperty("command", "color_wipe");
+                event.addProperty("duration", duree);
+                String s ="["+r+","+v+","+b+"]";
+                event.addProperty("rgb", s);
+                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Published Message: " + event.toString());
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
                 System.out.println("Message published");
@@ -180,8 +184,9 @@ public class MqttServices {
 
     // Démarre l’animation arc-en - ciel.
     // Le contenu du message est ignoré.
-    void animate_rainbow() {
-        String topic        = "laumio/Laumio_0FBFBF/json";
+    void animate_rainbow(String s) {
+
+        String topic        = "laumio/"+s+"/json";
         int qos             = 2;
 
         JsonObject event = new JsonObject();

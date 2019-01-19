@@ -62,33 +62,32 @@ public class MainActivity extends AppCompatActivity {
         inputLed = (TextInputEditText)findViewById(R.id.inputLed);
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.subscribe_status_advertise();
-                mqttService.advertise();
+                mqttService.set_pixel("Laumio_0FBFBF",9,255,0,0);
             }
         });
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.set_pixel(9,0,255,0);
+                mqttService.set_pixel("Laumio_107DA8",9,0,255,0);
             }
         });
         boutonBleu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.set_pixel(9,0,0,255);
+                mqttService.set_pixel("Laumio_107DA8",9,0,0,255);
             }
         });
         boutonLed.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.set_pixel(9,255,0,0);
+
             }
         });
         boutonWipe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
+               mqttService.color_wipe("Laumio_88813D",255,0,0,3000);
             }
         });
         boutonRainbow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mqttService.animate_rainbow();
+                mqttService.animate_rainbow("Laumio_CD0522");
             }
         });
         boutonAnneau.setOnClickListener(new View.OnClickListener() {

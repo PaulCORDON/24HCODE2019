@@ -20,11 +20,11 @@
         app:menu="@menu/navigation" />
 
     <Button
-        android:id="@+id/boutonWipe"
+        android:id="@+id/boutonSerpent"
         android:layout_width="159dp"
         android:layout_height="88dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="200dp"
         android:layout_marginBottom="240dp"
         android:text="Animation serpent"
@@ -295,5 +295,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.871" />
+
+    <Button
+        android:id="@+id/boutonRainbow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rainbow"
+        tools:layout_editor_absoluteX="243dp"
+        tools:layout_editor_absoluteY="179dp" />
+
+    <Button
+        android:id="@+id/boutonWipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wipe"
+        tools:layout_editor_absoluteX="243dp"
+        tools:layout_editor_absoluteY="227dp" />
 
 </android.support.constraint.ConstraintLayout>

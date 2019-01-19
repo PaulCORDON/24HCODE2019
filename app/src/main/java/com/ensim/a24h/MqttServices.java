@@ -73,7 +73,7 @@ public class MqttServices {
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
                 System.out.println("Message published");
-               // sampleClient.disconnect();
+                // sampleClient.disconnect();
                 //System.out.println("Disconnected");
                 //System.exit(0);
             } catch (MqttException me) {
@@ -280,27 +280,12 @@ public class MqttServices {
         MqttClient sampleClient = this.connection();
         if (sampleClient != null) {
 
-           sampleClient.setCallback(new MqttCallback() {
-                @Override
-                public void connectionLost(Throwable cause) {
-                   // msg("Connection lost...");
-                    System.out.println("Connexion perdue");
-
-                }
-
-                @Override
-                public void messageArrived(String topic, MqttMessage message) throws Exception {
-                   // TextView tvMessage = (TextView) findViewById(R.id.tvMessage);
-                    //tvMessage.setText(message.toString());
-                    System.out.println(message.toString());
-                }
-
-                @Override
-                public void deliveryComplete(IMqttDeliveryToken token) {
-                    System.out.println("Message delivre");
-
-                }
-            });
+            try {
+                sampleClient.subscribeWithResponse(topic);
+                System.out.println(sampleClient.subscribeWithResponse(topic));
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
 
 
         }

@@ -147,7 +147,30 @@ public class MqttServices {
     Les 4 octets du message sont les composantes rouge, vert, bleu de la couleur (0 à 255)
     suivies de la durée.*/
     void color_wipe(int r, int v, int b, int duree) {
-
+        String topic        = "laumio/all/color_wipe";
+        int qos             = 2;
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null){
+            try {
+                MqttMessage message = new MqttMessage();
+                String msg = "{'command': 'color_wipe','duration':"+duree+",'rgb': ["+r+","+v+","+b+"]}";
+                message.setPayload(msg.getBytes());
+                System.out.println("Publishing message: "+msg);
+                message.setQos(qos);
+                sampleClient.publish(topic, message);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                //System.exit(0);
+            } catch(MqttException me) {
+                System.out.println("reason "+me.getReasonCode());
+                System.out.println("msg "+me.getMessage());
+                System.out.println("loc "+me.getLocalizedMessage());
+                System.out.println("cause "+me.getCause());
+                System.out.println("excep "+me);
+                me.printStackTrace();
+            }
+        }
     }
 
     // Démarre l’animation arc-en - ciel.

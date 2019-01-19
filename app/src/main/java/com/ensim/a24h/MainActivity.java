@@ -60,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
         final MqttServices mqttService = new MqttServices();
 
 
-
-<<<<<<< HEAD
         String topic        = "laumio/all/animate_rainbow";
         String content      = "";
         int qos             = 2;
@@ -135,8 +133,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-=======
->>>>>>> master
+
     }
 
 }

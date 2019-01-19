@@ -61,21 +61,24 @@ public class MqttServices {
     }
 
     void set_pixel(String nomLaumio, int numLed, int r, int v, int b) {
-        String topic        = "laumio/+"+nomLaumio+"+/json";
+        String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
                 MqttMessage message = new MqttMessage();
-                String msg = "{'command': 'set_pixel','led': "+numLed+",rgb': ["+r+","+v+", "+b+"]}";
-                System.out.println("Publishing message: "+msg);
-                message.setPayload(msg.getBytes());
+                JsonObject event = new JsonObject();
+                event.addProperty("command", "set_pixel");
+                event.addProperty("led", numLed);
+                String s ="["+r+","+v+","+b+"]";
+                event.addProperty("rgb", s);
+                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
                 System.out.println("Message published");
-                // sampleClient.disconnect();
-                //System.out.println("Disconnected");
-                //System.exit(0);
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
             } catch (MqttException me) {
                 System.out.println("reason " + me.getReasonCode());
                 System.out.println("msg " + me.getMessage());
@@ -92,15 +95,19 @@ public class MqttServices {
     Les 4 octets du message sont le numéro de l’anneau
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
     void set_ring(String nomLaumio, int numAnneau, int r, int v, int b) {
-        String topic        = "laumio/+"+nomLaumio+"+/json";
+        String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
                 MqttMessage message = new MqttMessage();
-                String msg = "{'command': 'set_ring','ring': "+numAnneau+",rgb': ["+r+","+v+", "+b+"]}";
-                System.out.println("Publishing message: "+msg);
-                message.setPayload(msg.getBytes());
+                JsonObject event = new JsonObject();
+                event.addProperty("command", "set_ring");
+                event.addProperty("ring", "numAnneau");
+                String s ="["+r+","+v+","+b+"]";
+                event.addProperty("rgb", s);
+                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
                 System.out.println("Message published");
@@ -121,15 +128,19 @@ public class MqttServices {
     Les 4 octets du message sont le numéro de la colonne
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
     void set_column(String nomLaumio,int numCol, int r, int v, int b) {
-        String topic        = "laumio/+"+nomLaumio+"+json";
+        String topic        = "laumio/"+nomLaumio+"json";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
                 MqttMessage message = new MqttMessage();
-                String msg = "{'command': 'set_column','column': "+numCol+",rgb': ["+r+","+v+", "+b+"]}";
-                message.setPayload(msg.getBytes());
-                System.out.println("Publishing message: "+msg);
+                JsonObject event = new JsonObject();
+                event.addProperty("command", "set_column");
+                event.addProperty("column", "numCol");
+                String s ="["+r+","+v+","+b+"]";
+                event.addProperty("rgb", s);
+                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
                 System.out.println("Message published");
@@ -191,6 +202,7 @@ public class MqttServices {
 
         JsonObject event = new JsonObject();
         event.addProperty("command", "animate_rainbow");
+
         System.out.println("Published Message: " + event.toString());
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
@@ -217,8 +229,38 @@ public class MqttServices {
 
     // Change la couleur de toutes les leds.
     // Les 3 octets du message sont les composantes rouge, vert, bleu de la couleur (0 à 255)
-    void fill(int r, int v, int b) {
+    void fill(String s, int r, int v, int b) {
 
+        String topic        = "laumio/"+s+"/json";
+        int qos             = 2;
+
+        JsonObject event = new JsonObject();
+        event.addProperty("command", "fill");
+        String rvb ="["+r+","+v+","+b+"]";
+        event.addProperty("rgb", rvb);
+        event.addProperty("command", "fill");
+        System.out.println("Published Message: " + event.toString());
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null){
+            try {
+                MqttMessage message = new MqttMessage();
+                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
+                message.setQos(qos);
+                sampleClient.publish(topic, message);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                //System.exit(0);
+            } catch(MqttException me) {
+                System.out.println("reason "+me.getReasonCode());
+                System.out.println("msg "+me.getMessage());
+                System.out.println("loc "+me.getLocalizedMessage());
+                System.out.println("cause "+me.getCause());
+                System.out.println("excep "+me);
+                me.printStackTrace();
+            }
+        }
     }
 
     // Renvoie un message sur le topic laumio/status/advertise contenant son nom.

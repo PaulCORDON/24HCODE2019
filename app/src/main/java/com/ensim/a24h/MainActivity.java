@@ -85,21 +85,17 @@ public class MainActivity extends AppCompatActivity {
                 mqttService.set_pixel("Laumio_107DA8",9,0,0,255);
             }
         });
-        boutonLed.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
 
-            }
-        });
         boutonWipe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                mqttService.color_wipe("Laumio_88813D",255,0,0,3000);
             }
         });
-        boutonRainbow.setOnClickListener(new View.OnClickListener() {
+        /*boutonRainbow.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mqttService.animate_rainbow("Laumio_CD0522");
             }
-        });
+        });*/
 
 
 

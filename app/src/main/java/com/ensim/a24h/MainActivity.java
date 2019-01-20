@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        boutonRing.setOnClickListener(new View.OnClickListener() {
+       /* boutonRing.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
                     //bleu blanc rouge vive la france et vive la république
@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });
-        boutonColumn.setOnClickListener(new View.OnClickListener() {
+        });*/
+        /*boutonColumn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
                     //bleu blanc rouge vive la france et vive la république
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {

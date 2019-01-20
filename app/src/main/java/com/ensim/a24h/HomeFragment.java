@@ -256,7 +256,7 @@ public class HomeFragment extends Fragment {
                 int bouleAEteindre = 0;
                 int cpteur = 0;
                 for (String boule : listeBouleCheckees) {
-                    mqttService.fill(boule, 128, 0, 128);
+                    mqttService.fill(boule, 0, 255, 0);
                     try {
                         Thread.sleep(150);
                     } catch (InterruptedException e) {

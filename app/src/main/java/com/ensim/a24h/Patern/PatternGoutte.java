@@ -7,7 +7,7 @@ public class PatternGoutte implements IPattern{
     int v;
     int b;
 
-    PatternGoutte(int r,int v,int b){
+    public PatternGoutte(int r,int v,int b){
         this.r=r;
         this.v=v;
         this.b=b;

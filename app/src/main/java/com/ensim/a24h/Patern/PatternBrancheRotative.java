@@ -10,7 +10,7 @@ public class PatternBrancheRotative implements IPattern{
     int b;
     private ArrayList<String> listeBoules;
 
-    PatternBrancheRotative(int r, int v, int b, ArrayList<String> s){
+    public PatternBrancheRotative(int r, int v, int b, ArrayList<String> s){
         this.r=r;
         this.v=v;
         this.b=b;

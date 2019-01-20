@@ -33,11 +33,52 @@ public class MPDServices {
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null) {
             try {
-                MqttMessage message = new MqttMessage();
-                String msg = "laumio/status/discover";
-                message.setPayload(msg.getBytes());
-                message.setQos(qos);
-                sampleClient.publish(topic, message);
+
+                sampleClient.publish(topic,null);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                //System.exit(0);
+            } catch (MqttException me) {
+                System.out.println("reason " + me.getReasonCode());
+                System.out.println("msg " + me.getMessage());
+                System.out.println("loc " + me.getLocalizedMessage());
+                System.out.println("cause " + me.getCause());
+                System.out.println("excep " + me);
+                me.printStackTrace();
+            }
+        }
+    }
+    void pause(){
+        String topic        = "music/control/pause";
+        int qos             = 2;
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null) {
+            try {
+
+                sampleClient.publish(topic,null);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                //System.exit(0);
+            } catch (MqttException me) {
+                System.out.println("reason " + me.getReasonCode());
+                System.out.println("msg " + me.getMessage());
+                System.out.println("loc " + me.getLocalizedMessage());
+                System.out.println("cause " + me.getCause());
+                System.out.println("excep " + me);
+                me.printStackTrace();
+            }
+        }
+    }
+    void stop(){
+        String topic        = "music/control/stop";
+        int qos             = 2;
+        MqttClient sampleClient = this.connection();
+        if(sampleClient!=null) {
+            try {
+
+                sampleClient.publish(topic,null);
                 System.out.println("Message published");
                 sampleClient.disconnect();
                 System.out.println("Disconnected");

@@ -12,7 +12,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ensim.a24h.Model.Scenario;
+import com.ensim.a24h.Patern.PatternBrancheRotative;
+import com.ensim.a24h.Patern.PatternColumn;
+import com.ensim.a24h.Patern.PatternFill;
+import com.ensim.a24h.Patern.PatternGoutte;
 import com.ensim.a24h.Patern.PatternRainbow;
+import com.ensim.a24h.Patern.PatternRing;
 import com.ensim.a24h.Patern.PatternWipe;
 
 import java.util.ArrayList;
@@ -77,7 +82,7 @@ public class ValueChoiceActivity extends AppCompatActivity {
         b.setText("5");
         duree.setText("5");
 
-        scenario = getIntent().getStringExtra("scenario");
+        scenario = getIntent().getStringExtra("type");
         Log.d("Recupération", scenario);
         final Scenario scene = new Scenario();
         ok.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +98,32 @@ public class ValueChoiceActivity extends AppCompatActivity {
                 {
                     scene.add(new PatternRainbow(listeBouleCheckees));
                 }
+                if (scenario.equals("brancherotative"))
+                {
+                    PatternBrancheRotative pbranche = new PatternBrancheRotative(Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()), listeBouleCheckees);
+                    scene.add(pbranche);
+                }
+                if (scenario.equals("fill"))
+                {
+                    PatternFill pfill = new PatternFill(listeBouleCheckees, Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()));
+                    scene.add(pfill);
+                }
+                if (scenario.equals("goutte"))
+                {
+                    PatternGoutte pgoutte = new PatternGoutte(Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()));
+                    scene.add(pgoutte);
+                }
+                if (scenario.equals("column"))
+                {
+                    PatternColumn pcol = new PatternColumn(listeBouleCheckees, Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()),0);
+                    scene.add(pcol);
+                }
+                if (scenario.equals("ring"))
+                {
+                    PatternRing pring = new PatternRing(listeBouleCheckees, Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()),0);
+                    scene.add(pring);
+                }
+
                 i.putExtra("nom", nom.getText().toString());
                 startActivity(i);
                 finish();

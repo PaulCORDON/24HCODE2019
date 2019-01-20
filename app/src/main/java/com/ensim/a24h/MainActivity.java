@@ -55,13 +55,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final MqttServices mqttService = new MqttServices();
+        final MPDServices mpdServices = new MPDServices();
         boutonRouge = (Button)findViewById(R.id.boutonRouge);
         boutonVert = (Button)findViewById(R.id.boutonVert);
         boutonBleu = (Button)findViewById(R.id.boutonBleu);
         boutonWipe = (Button)findViewById(R.id.boutonWipe);
-        boutonRainbow = (Button)findViewById(R.id.boutonRainbow);
-        boutonSerpent = (Button)findViewById(R.id.boutonSerpent);
-        boutonNeige = (Button)findViewById(R.id.boutonNeige);
+        //boutonRainbow = (Button)findViewById(R.id.boutonRainbow);
+        //boutonSerpent = (Button)findViewById(R.id.boutonSerpent);
+        //boutonNeige = (Button)findViewById(R.id.boutonNeige);
         boule1 = (CheckBox)findViewById(R.id.checkBox);
         boule2 = (CheckBox)findViewById(R.id.checkBox10);
         boule3 = (CheckBox)findViewById(R.id.checkBox11);
@@ -118,9 +119,9 @@ public class MainActivity extends AppCompatActivity {
         });
         boutonBleu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                for (String boule : listeBouleCheckees) {
-                    mqttService.fill(boule,0,0,255);
-                }
+
+                    mpdServices.subscribe_get_volume();
+
 
             }
         });

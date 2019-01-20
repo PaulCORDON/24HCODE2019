@@ -195,17 +195,59 @@ public class ValueChoiceActivity extends AppCompatActivity {
 
         if (scenario.equals("ring"))
         {
-
+            ring.setVisibility(View.VISIBLE);
+            column.setVisibility(View.GONE);
+            r.setVisibility(View.VISIBLE);
+            v.setVisibility(View.VISIBLE);
+            b.setVisibility(View.VISIBLE);
+            duree.setVisibility(View.VISIBLE);
+            boule1.setVisibility(View.VISIBLE);
+            boule2.setVisibility(View.VISIBLE);
+            boule3.setVisibility(View.VISIBLE);
+            boule4.setVisibility(View.VISIBLE);
+            boule5.setVisibility(View.VISIBLE);
+            boule6.setVisibility(View.VISIBLE);
+            boule7.setVisibility(View.VISIBLE);
+            boule8.setVisibility(View.VISIBLE);
+            boule9.setVisibility(View.VISIBLE);
         }
 
         if (scenario.equals("column"))
         {
-
+            ring.setVisibility(View.GONE);
+            column.setVisibility(View.VISIBLE);
+            r.setVisibility(View.VISIBLE);
+            v.setVisibility(View.VISIBLE);
+            b.setVisibility(View.VISIBLE);
+            duree.setVisibility(View.VISIBLE);
+            boule1.setVisibility(View.VISIBLE);
+            boule2.setVisibility(View.VISIBLE);
+            boule3.setVisibility(View.VISIBLE);
+            boule4.setVisibility(View.VISIBLE);
+            boule5.setVisibility(View.VISIBLE);
+            boule6.setVisibility(View.VISIBLE);
+            boule7.setVisibility(View.VISIBLE);
+            boule8.setVisibility(View.VISIBLE);
+            boule9.setVisibility(View.VISIBLE);
         }
 
         if (scenario.equals("brancherotative"))
         {
-
+            ring.setVisibility(View.GONE);
+            column.setVisibility(View.GONE);
+            r.setVisibility(View.VISIBLE);
+            v.setVisibility(View.VISIBLE);
+            b.setVisibility(View.VISIBLE);
+            duree.setVisibility(View.VISIBLE);
+            boule1.setVisibility(View.VISIBLE);
+            boule2.setVisibility(View.VISIBLE);
+            boule3.setVisibility(View.VISIBLE);
+            boule4.setVisibility(View.VISIBLE);
+            boule5.setVisibility(View.VISIBLE);
+            boule6.setVisibility(View.VISIBLE);
+            boule7.setVisibility(View.VISIBLE);
+            boule8.setVisibility(View.VISIBLE);
+            boule9.setVisibility(View.VISIBLE);
         }
 
 

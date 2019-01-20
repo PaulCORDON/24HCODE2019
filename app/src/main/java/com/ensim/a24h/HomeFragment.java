@@ -25,6 +25,11 @@ public class HomeFragment extends Fragment {
     private Button boutonNeige;
     private Button boutonRing;
     private Button boutonColumn;
+    private Button play;
+    private Button pause;
+    private Button stop;
+    private Button previous;
+    private Button next;
     private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9;
 
     public HomeFragment() {
@@ -59,6 +64,12 @@ public class HomeFragment extends Fragment {
         boule7 = (CheckBox) view.findViewById(R.id.checkBox15);
         boule8 = (CheckBox) view.findViewById(R.id.checkBox16);
         boule9 = (CheckBox) view.findViewById(R.id.checkBox17);
+        play = (Button)view.findViewById(R.id.play);
+        stop = (Button)view.findViewById(R.id.stop);
+        pause = (Button)view.findViewById(R.id.pause);
+        previous = (Button)view.findViewById(R.id.previous);
+        next = (Button)view.findViewById(R.id.next);
+
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
 
 
@@ -349,6 +360,8 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        
 
         return view;
     }

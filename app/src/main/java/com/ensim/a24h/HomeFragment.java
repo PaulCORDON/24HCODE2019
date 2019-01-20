@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,6 +31,10 @@ public class HomeFragment extends Fragment {
     private Button stop;
     private Button previous;
     private Button next;
+    private SeekBar seekBarRouge;
+    private SeekBar seekBarVert;
+    private SeekBar seekBarBleu;
+    private Button boutonChenille;//bouton pour faire une chenille avec toutes les boules sélectionnées
     private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9;
 
     public HomeFragment() {
@@ -55,6 +60,9 @@ public class HomeFragment extends Fragment {
         boutonRainbow = (Button) view.findViewById(R.id.boutonRainbow);
         boutonSerpent = (Button) view.findViewById(R.id.boutonSerpent);
         boutonNeige = (Button) view.findViewById(R.id.boutonNeige);
+        seekBarBleu = (SeekBar)view.findViewById(R.id.seekBar4);
+        seekBarVert = (SeekBar)view.findViewById(R.id.seekBar3);
+        seekBarRouge = (SeekBar)view.findViewById(R.id.seekBar2);
         boule1 = (CheckBox) view.findViewById(R.id.checkBox);
         boule2 = (CheckBox) view.findViewById(R.id.checkBox10);
         boule3 = (CheckBox) view.findViewById(R.id.checkBox11);
@@ -101,6 +109,46 @@ public class HomeFragment extends Fragment {
                     mqttService.set_column(boule, 1, 255, 255, 255);
                     mqttService.set_column(boule, 1, 255, 0, 0);
                 }
+
+            }
+        });*/
+        //pour faire un serpent avec les boules entieres
+       /* boutonChenille.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int bouleAEteindre=0;
+                int cpteur=0;
+                for (String boule : listeBouleCheckees) {
+                    mqttService.fill(boule, 128, 0, 128);
+                    try {
+                        Thread.sleep(150);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if(cpteur>2){
+                        mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
+                        bouleAEteindre++;
+
+                    }
+                    cpteur++;
+                }
+
+                mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
+                bouleAEteindre++;
+                try {
+                    Thread.sleep(150);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
+                bouleAEteindre++;
+                try {
+                    Thread.sleep(150);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
+                bouleAEteindre++;
+
 
             }
         });*/

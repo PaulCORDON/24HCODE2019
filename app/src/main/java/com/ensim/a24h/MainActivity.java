@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private Button boutonRainbow;
     private Button boutonSerpent;
     private Button boutonNeige;
+    private Button boutonRing;
+    private Button boutonColumn;
     private CheckBox boule1,boule2,boule3,boule4,boule5,boule6,boule7,boule8,boule9;
 
 
@@ -83,6 +85,29 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        boutonRing.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                for (String boule : listeBouleCheckees) {
+                    //bleu blanc rouge vive la france et vive la république
+                    mqttService.set_ring(boule,2,0,0, 255);
+                    mqttService.set_ring(boule,1,255,255, 255);
+                    mqttService.set_ring(boule,0,255,0, 0);
+                }
+
+            }
+        });
+        boutonColumn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                for (String boule : listeBouleCheckees) {
+                    //bleu blanc rouge vive la france et vive la république
+                    mqttService.set_column(boule,2,0,0, 255);
+                    mqttService.set_column(boule,1,255,255, 255);
+                    mqttService.set_column(boule,1,255,0, 0);
+                }
+
+            }
+        });
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
@@ -137,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                     mqttService.set_pixel(boule,0,0,0,0);
                     mqttService.set_pixel(boule,1,0,0,0);
                     mqttService.set_pixel(boule,2,0,0,0);
-                    mqttService.set_pixel(boule,9,0,0,0);
                     mqttService.set_pixel(boule,3,0,0,0);
                     mqttService.set_pixel(boule,4,0,0,0);
                     mqttService.set_pixel(boule,5,0,0,0);
@@ -155,27 +179,53 @@ public class MainActivity extends AppCompatActivity {
         boutonNeige.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                for (String boule : listeBouleCheckees) {mqttService.set_pixel(boule, 9, 48, 124, 255);}
+                for (String boule : listeBouleCheckees) {mqttService.set_pixel(boule, 9, 0, 97, 255);}
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                for (String boule : listeBouleCheckees) { mqttService.set_ring(boule, 2, 78, 142, 252);}
-                    try {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                for (String boule : listeBouleCheckees) {mqttService.set_ring(boule, 1, 122, 171, 255);}
+                for (String boule : listeBouleCheckees) { mqttService.set_ring(boule, 2, 89, 152, 255);}
                     try {
                         Thread.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
-                for (String boule : listeBouleCheckees) {mqttService.set_ring(boule, 0, 173, 203, 255);}
+                for (String boule : listeBouleCheckees) {mqttService.set_ring(boule, 1, 178, 207, 255);}
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                for (String boule : listeBouleCheckees) {mqttService.set_ring(boule, 0, 255, 255, 255);}
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                for (String boule : listeBouleCheckees) {mqttService.set_pixel(boule, 9, 0, 0, 0);}
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                for (String boule : listeBouleCheckees) { mqttService.set_ring(boule, 2, 0, 0, 0);}
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                for (String boule : listeBouleCheckees) {mqttService.set_ring(boule, 1, 0, 0, 0);}
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                for (String boule : listeBouleCheckees) {mqttService.set_ring(boule, 0, 0, 0, 0);}
 
 
             }

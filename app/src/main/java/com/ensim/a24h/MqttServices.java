@@ -1,7 +1,5 @@
 package com.ensim.a24h;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -15,7 +13,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 
 public class MqttServices {
 
@@ -280,11 +277,6 @@ public class MqttServices {
         }
     }
 
-    // Renvoie un message sur le topic laumio/status/advertise contenant son nom.
-    void discover() {
-
-    }
-
 
     // !!!!!!!!!!!Fonctions pour les capteurs!!!!!!!!!!!!!!!!!!
 
@@ -305,7 +297,29 @@ public class MqttServices {
 
     //Fonction pour le capteur de distance value
     void subscribe_distance_value() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("distance/value");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
     //Fonction pour le capteur de distance status
@@ -316,37 +330,113 @@ public class MqttServices {
     //Fonction pour le capteur atmosphérique
 
     void subscribe_atmosphere_temperature() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("atmosphere/temperature");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
 
     void subscribe_atmosphere_pression() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("atmosphere/pression");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
     void subscribe_atmosphere_humidite() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("atmosphere/humidite");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
     void subscribe_atmosphere_humidite_absolue() {
-        String topic = "atmosphere/humidite_absolue";
-
-
-    }
-
-    void subscribe_status_advertise() {
-        String topic = "laumio/status/discover";
-        MqttClient sampleClient = this.connection();
-        if (sampleClient != null) {
-
-            try {
-                sampleClient.subscribeWithResponse(topic);
-                System.out.println(sampleClient.subscribeWithResponse(topic));
-            } catch (MqttException e) {
-                e.printStackTrace();
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("atmosphere/humidite_absolue");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
             }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
 
-        }
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
+
+    }
+
+
+    void subscribe_status_advertise() {
     }
 }
+

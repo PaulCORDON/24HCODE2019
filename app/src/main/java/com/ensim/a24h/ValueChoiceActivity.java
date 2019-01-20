@@ -82,10 +82,12 @@ public class ValueChoiceActivity extends AppCompatActivity {
         boule9 = (CheckBox) findViewById(R.id.checkBox17);
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
 
-        r.setText("5");
-        v.setText("5");
-        b.setText("5");
-        duree.setText("5");
+        r.setText("0");
+        v.setText("0");
+        b.setText("0");
+        duree.setText("0");
+        column.setText("0");
+        ring.setText("0");
 
         scenario = getIntent().getStringExtra("type");
         Log.d("Recupération", scenario);

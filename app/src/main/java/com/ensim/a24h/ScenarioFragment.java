@@ -29,7 +29,7 @@ public class ScenarioFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.activity_scenario_fragment, container, false);
-        creer = mListView.findViewById(R.id.creation);
+        creer = view.findViewById(R.id.creation);
         creer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

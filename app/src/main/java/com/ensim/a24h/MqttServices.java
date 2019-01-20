@@ -17,10 +17,11 @@ import java.nio.charset.StandardCharsets;
 public class MqttServices {
 
     public String currentTempValue="";
-    public String currentPressionValue;
-    public String currentHumiditeValue;
-    public String currentDistanceValue;
-    public String currentHumiditeAbsolueValue;
+    public String currentPressionValue="";
+    public String currentHumiditeValue="";
+    public String currentDistanceValue="";
+    public String currentHumiditeAbsolueValue="";
+    
 
 
     MqttClient connection() {
@@ -373,7 +374,7 @@ public class MqttServices {
 
     //Fonction pour le capteur de distance value
     public void subscribe_distance_value() {
-        MqttClient client = this.connection();
+        final MqttClient client = this.connection();
         try {
             client.subscribe("distance/value");
         } catch (MqttException e) {
@@ -383,6 +384,8 @@ public class MqttServices {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println(new String(message.getPayload()));
+                currentDistanceValue=new String(message.getPayload());
+                client.unsubscribe(topic);
             }
 
             @Override
@@ -428,7 +431,7 @@ public class MqttServices {
     //Fonction pour le capteur atmosphérique
 
     public void subscribe_atmosphere_temperature() {
-        MqttClient client = this.connection();
+        final MqttClient client = this.connection();
         try {
             client.subscribe("atmosphere/temperature");
         } catch (MqttException e) {
@@ -439,6 +442,7 @@ public class MqttServices {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println(new String(message.getPayload()));
                 currentTempValue=new String(message.getPayload());
+                client.unsubscribe(topic);
             }
 
             @Override
@@ -456,7 +460,7 @@ public class MqttServices {
 
 
     public void subscribe_atmosphere_pression() {
-        MqttClient client = this.connection();
+        final MqttClient client = this.connection();
         try {
             client.subscribe("atmosphere/pression");
         } catch (MqttException e) {
@@ -466,6 +470,8 @@ public class MqttServices {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println(new String(message.getPayload()));
+                currentPressionValue=new String(message.getPayload());
+                client.unsubscribe(topic);
             }
 
             @Override
@@ -482,7 +488,7 @@ public class MqttServices {
     }
 
     public void subscribe_atmosphere_humidite() {
-        MqttClient client = this.connection();
+        final MqttClient client = this.connection();
         try {
             client.subscribe("atmosphere/humidite");
         } catch (MqttException e) {
@@ -492,6 +498,8 @@ public class MqttServices {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println(new String(message.getPayload()));
+                currentHumiditeValue=new String(message.getPayload());
+                client.unsubscribe(topic);
             }
 
             @Override

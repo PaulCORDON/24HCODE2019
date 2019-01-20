@@ -3,6 +3,7 @@ package com.ensim.a24h;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,6 +36,8 @@ public class HomeFragment extends Fragment {
     private SeekBar seekBarRouge;
     private SeekBar seekBarVert;
     private SeekBar seekBarBleu;
+    private SeekBar volumeControl;
+
     private Button boutonChenille;//bouton pour faire une chenille avec toutes les boules sélectionnées
     private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9;
 
@@ -53,6 +57,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_home_fragment, container, false);
         final MqttServices mqttService = new MqttServices();
+        final MPDServices musicPlayer = new MPDServices();
         boutonRouge = (Button) view.findViewById(R.id.boutonRouge);
         boutonVert = (Button) view.findViewById(R.id.boutonVert);
         boutonBleu = (Button) view.findViewById(R.id.boutonBleu);
@@ -60,9 +65,9 @@ public class HomeFragment extends Fragment {
         boutonRainbow = (Button) view.findViewById(R.id.boutonRainbow);
         boutonSerpent = (Button) view.findViewById(R.id.boutonSerpent);
         boutonNeige = (Button) view.findViewById(R.id.boutonNeige);
-        seekBarBleu = (SeekBar)view.findViewById(R.id.seekBar4);
-        seekBarVert = (SeekBar)view.findViewById(R.id.seekBar3);
-        seekBarRouge = (SeekBar)view.findViewById(R.id.seekBar2);
+        seekBarBleu = (SeekBar) view.findViewById(R.id.seekBar4);
+        seekBarVert = (SeekBar) view.findViewById(R.id.seekBar3);
+        seekBarRouge = (SeekBar) view.findViewById(R.id.seekBar2);
         boule1 = (CheckBox) view.findViewById(R.id.checkBox);
         boule2 = (CheckBox) view.findViewById(R.id.checkBox10);
         boule3 = (CheckBox) view.findViewById(R.id.checkBox11);
@@ -72,14 +77,48 @@ public class HomeFragment extends Fragment {
         boule7 = (CheckBox) view.findViewById(R.id.checkBox15);
         boule8 = (CheckBox) view.findViewById(R.id.checkBox16);
         boule9 = (CheckBox) view.findViewById(R.id.checkBox17);
-        play = (Button)view.findViewById(R.id.play);
-        stop = (Button)view.findViewById(R.id.stop);
-        pause = (Button)view.findViewById(R.id.pause);
-        previous = (Button)view.findViewById(R.id.previous);
-        next = (Button)view.findViewById(R.id.next);
+        seekBarBleu = (SeekBar) view.findViewById(R.id.seekBar4);
+        seekBarVert = (SeekBar) view.findViewById(R.id.seekBar3);
+        seekBarRouge = (SeekBar) view.findViewById(R.id.seekBar2);
+        seekBarRouge = (SeekBar) view.findViewById(R.id.seekBar2);
+        play = (Button) view.findViewById(R.id.play);
+        pause = (Button) view.findViewById(R.id.pause);
+        stop = (Button) view.findViewById(R.id.stop);
+        previous = (Button) view.findViewById(R.id.previous);
+        next = (Button) view.findViewById(R.id.next);
+        volumeControl = view.findViewById(R.id.volumeControl);
 
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
 
+        play.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.play();
+            }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.stop();
+            }
+        });
+
+        pause.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.pause();
+            }
+        });
+
+        previous.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.previousMusic();
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.nextMusic();
+            }
+        });
 
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -317,6 +356,27 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        volumeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            // When Progress value changed.
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+                musicPlayer.setVol(progressValue);
+            }
+
+            // Notification that the user has started a touch gesture.
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                Log.i("", "Started tracking seekbar");
+            }
+
+            // Notification that the user has finished a touch gesture
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Log.i("", "Stopped tracking seekbar");
+            }
+        });
+
         boule3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -409,7 +469,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        
 
         return view;
     }

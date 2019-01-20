@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private Button boutonRainbow;
     private Button boutonSerpent;
     private Button boutonNeige;
+    private Button boutonRing;
+    private Button boutonColumn;
     private CheckBox boule1,boule2,boule3,boule4,boule5,boule6,boule7,boule8,boule9;
 
 
@@ -79,7 +81,33 @@ public class MainActivity extends AppCompatActivity {
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
-                    mqttService.fill(boule,255,0,0);
+                    //mqttService.fill(boule,255,0,0);
+                    mqttService.set_ring(boule,0,0,0, 255);
+                    mqttService.set_ring(boule,1,255,255, 255);
+                    mqttService.set_ring(boule,2,255,0, 0);
+                }
+
+            }
+        });
+
+        boutonRing.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                for (String boule : listeBouleCheckees) {
+                    //bleu blanc rouge vive la france et vive la république
+                    mqttService.set_ring(boule,2,0,0, 255);
+                    mqttService.set_ring(boule,1,255,255, 255);
+                    mqttService.set_ring(boule,0,255,0, 0);
+                }
+
+            }
+        });
+        boutonColumn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                for (String boule : listeBouleCheckees) {
+                    //bleu blanc rouge vive la france et vive la république
+                    mqttService.set_column(boule,2,0,0, 255);
+                    mqttService.set_column(boule,1,255,255, 255);
+                    mqttService.set_column(boule,1,255,0, 0);
                 }
 
             }
@@ -87,7 +115,10 @@ public class MainActivity extends AppCompatActivity {
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
-                    mqttService.fill(boule,0,255,0);
+                    //mqttService.fill(boule,0,255,0);
+                    mqttService.set_column(boule,0,0,0, 255);
+                    mqttService.set_column(boule,1,255,255, 255);
+                    mqttService.set_column(boule,2,255,0, 0);
                 }
 
             }

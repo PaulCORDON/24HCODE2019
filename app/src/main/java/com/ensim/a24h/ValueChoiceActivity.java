@@ -29,6 +29,8 @@ public class ValueChoiceActivity extends AppCompatActivity {
     private EditText b;
     private EditText duree;
     private EditText nom;
+    private EditText column;
+    private EditText ring;
     private Button ok;
     private TextView mTextMessage;
     private Button boutonRouge;
@@ -56,6 +58,8 @@ public class ValueChoiceActivity extends AppCompatActivity {
         nom = findViewById(R.id.nom);
         duree = findViewById(R.id.duree);
         ok = findViewById(R.id.ok);
+        ring = findViewById(R.id.ring);
+        column = findViewById(R.id.column);
         boutonRouge = (Button) findViewById(R.id.boutonRouge);
         boutonVert = (Button) findViewById(R.id.boutonVert);
         boutonBleu = (Button) findViewById(R.id.boutonBleu);
@@ -131,6 +135,31 @@ public class ValueChoiceActivity extends AppCompatActivity {
         });
 
         if (scenario.equals("wipe"))
+        {
+
+        }
+
+        if (scenario.equals("rainbow"))
+        {
+
+        }
+
+        if (scenario.equals("fill"))
+        {
+
+        }
+
+        if (scenario.equals("ring"))
+        {
+
+        }
+
+        if (scenario.equals("column"))
+        {
+
+        }
+
+        if (scenario.equals("brancherotative"))
         {
 
         }

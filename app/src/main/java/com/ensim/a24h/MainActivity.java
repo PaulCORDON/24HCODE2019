@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -60,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         boutonVert = (Button)findViewById(R.id.boutonVert);
         boutonBleu = (Button)findViewById(R.id.boutonBleu);
         boutonWipe = (Button)findViewById(R.id.boutonWipe);
-        //boutonRainbow = (Button)findViewById(R.id.boutonRainbow);
-        //boutonSerpent = (Button)findViewById(R.id.boutonSerpent);
-        //boutonNeige = (Button)findViewById(R.id.boutonNeige);
+        boutonRainbow = (Button)findViewById(R.id.boutonRainbow);
+        boutonSerpent = (Button)findViewById(R.id.boutonSerpent);
+        boutonNeige = (Button)findViewById(R.id.boutonNeige);
         boule1 = (CheckBox)findViewById(R.id.checkBox);
         boule2 = (CheckBox)findViewById(R.id.checkBox10);
         boule3 = (CheckBox)findViewById(R.id.checkBox11);
@@ -79,11 +80,15 @@ public class MainActivity extends AppCompatActivity {
 
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                for (String boule : listeBouleCheckees) {
+                Log.d("Main activté", "onClick: ");
+                mpdServices.play();
+                 Log.d("Main activté", "onClick: ");
 
-                    mqttService.subscribe_atmosphere_humidite();
-                }
+                /*mpdServices.play();
+                mpdServices.pause();
 
+                mpdServices.stop();        */
+                
             }
         });
 
@@ -119,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
         });
         boutonBleu.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                    mpdServices.subscribe_get_volume();
-
+                for (String boule : listeBouleCheckees) {
+                    mqttService.fill(boule,0,0,255);
+                }
 
             }
         });

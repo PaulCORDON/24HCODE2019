@@ -16,12 +16,12 @@ import java.nio.charset.StandardCharsets;
 
 public class MqttServices {
 
-    public String currentTempValue;
+    public String currentTempValue="";
     public String currentPressionValue;
     public String currentHumiditeValue;
     public String currentDistanceValue;
     public String currentHumiditeAbsolueValue;
-    
+
 
     MqttClient connection() {
         String broker = "tcp://mpd.lan:1883";
@@ -288,17 +288,86 @@ public class MqttServices {
     // !!!!!!!!!!!Fonctions pour les capteurs!!!!!!!!!!!!!!!!!!
 
     //Fonction pour la telecommande
-    public void subscribe_telecommande(/*nom de la touche*/) {
+    public void subscribe_telecommande(String nomTouche) {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("remote/"+nomTouche+"/state");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
 
     }
 
     //Fonction pour le capteur de presence state
     public void subscribe_presence_state() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("presence/state");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
 
     }
 
     // Fonction pour le capteur de presence status
     void subscribe_presence_status() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("presence/status");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
 
     }
 
@@ -369,6 +438,7 @@ public class MqttServices {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println(new String(message.getPayload()));
+                currentTempValue=new String(message.getPayload());
             }
 
             @Override

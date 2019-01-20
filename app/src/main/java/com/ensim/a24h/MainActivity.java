@@ -3,8 +3,6 @@ package com.ensim.a24h;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.MenuItem;
@@ -79,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
-                    mqttService.fill(boule,255,0,0);
+
+                    mqttService.subscribe_atmosphere_humidite();
                 }
 
             }

@@ -67,14 +67,14 @@
                     app:layout_constraintVertical_bias="0.033" />
 
                 <SeekBar
-                    android:id="@+id/seekBar5"
+                    android:id="@+id/seekBar3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="255"
                     android:progress="1"
                     android:progressTint="#1ED718"
                     android:thumbTint="#1ED718"
-                    app:layout_constraintTop_toBottomOf="@+id/seekBar6" />
+                    app:layout_constraintTop_toBottomOf="@+id/seekBar4" />
 
                 <Button
                     android:id="@+id/rainbow"
@@ -125,13 +125,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
-                <SeekBar
-                    android:id="@+id/volumeControl2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:visibility="gone" />
-
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
@@ -166,7 +159,7 @@
                     android:ems="10"
                     android:inputType="number"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/seekBar5" />
+                    app:layout_constraintTop_toBottomOf="@+id/seekBar3" />
 
                 <Button
                     android:id="@+id/goutte"
@@ -185,14 +178,14 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <SeekBar
-                    android:id="@+id/seekBar6"
+                    android:id="@+id/seekBar4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="255"
                     android:progress="1"
                     android:progressTint="#0628B2"
                     android:thumbTint="#0628B2"
-                    app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+                    app:layout_constraintTop_toBottomOf="@+id/seekBar2" />
 
                 <Button
                     android:id="@+id/edti"
@@ -459,7 +452,7 @@
                 </LinearLayout>
 
                 <SeekBar
-                    android:id="@+id/seekBar"
+                    android:id="@+id/seekBar2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="255"

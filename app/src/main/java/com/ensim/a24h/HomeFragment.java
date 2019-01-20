@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class HomeFragment extends Fragment {
     private Button boutonNeige;
     private Button boutonRing;
     private Button boutonColumn;
+    private SeekBar seekBarRouge;
+    private SeekBar seekBarVert;
+    private SeekBar seekBarBleu;
     private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9;
 
     public HomeFragment() {
@@ -50,6 +54,9 @@ public class HomeFragment extends Fragment {
         boutonRainbow = (Button) view.findViewById(R.id.boutonRainbow);
         boutonSerpent = (Button) view.findViewById(R.id.boutonSerpent);
         boutonNeige = (Button) view.findViewById(R.id.boutonNeige);
+        seekBarBleu = (SeekBar)view.findViewById(R.id.seekBar4);
+        seekBarVert = (SeekBar)view.findViewById(R.id.seekBar3);
+        seekBarRouge = (SeekBar)view.findViewById(R.id.seekBar2);
         boule1 = (CheckBox) view.findViewById(R.id.checkBox);
         boule2 = (CheckBox) view.findViewById(R.id.checkBox10);
         boule3 = (CheckBox) view.findViewById(R.id.checkBox11);

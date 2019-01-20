@@ -81,10 +81,7 @@ public class MainActivity extends AppCompatActivity {
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
-                    //mqttService.fill(boule,255,0,0);
-                    mqttService.set_ring(boule,0,0,0, 255);
-                    mqttService.set_ring(boule,1,255,255, 255);
-                    mqttService.set_ring(boule,2,255,0, 0);
+                    mqttService.fill(boule,255,0,0);
                 }
 
             }
@@ -115,10 +112,7 @@ public class MainActivity extends AppCompatActivity {
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
-                    //mqttService.fill(boule,0,255,0);
-                    mqttService.set_column(boule,0,0,0, 255);
-                    mqttService.set_column(boule,1,255,255, 255);
-                    mqttService.set_column(boule,2,255,0, 0);
+                    mqttService.fill(boule,0,255,0);
                 }
 
             }

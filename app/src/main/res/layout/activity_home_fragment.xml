@@ -566,7 +566,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -588,7 +587,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -610,11 +608,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteY="939dp">
+
+            <Button
+                android:id="@+id/boutonDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Distance" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
     </LinearLayout>
     </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

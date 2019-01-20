@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment {
     private Button boutonTemperature;
     private Button boutonPression;
     private Button boutonHumidite;
+    private Button boutonDistance;
     private Button personnaliser;
     private SeekBar seekBarRouge;
     private SeekBar seekBarVert;
@@ -46,6 +47,7 @@ public class HomeFragment extends Fragment {
     private TextView temperature;
     private TextView humidite;
     private TextView pression;
+    private TextView distance;
 
     private Button boutonChenille;//bouton pour faire une chenille avec toutes les boules sélectionnées
     private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9;
@@ -83,6 +85,7 @@ public class HomeFragment extends Fragment {
         boutonTemperature = (Button) view.findViewById(R.id.boutonTemperature);
         boutonPression = (Button) view.findViewById(R.id.boutonPresion);
         boutonHumidite = (Button) view.findViewById(R.id.boutonHumidite);
+        boutonDistance = (Button) view.findViewById(R.id.boutonDistance);
         boule1 = (CheckBox) view.findViewById(R.id.checkBox);
         boule2 = (CheckBox) view.findViewById(R.id.checkBox10);
         boule3 = (CheckBox) view.findViewById(R.id.checkBox11);
@@ -98,36 +101,64 @@ public class HomeFragment extends Fragment {
         previous = (Button) view.findViewById(R.id.previous);
         next = (Button) view.findViewById(R.id.next);
         personnaliser = (Button) view.findViewById(R.id.personnaliser);
-        temperature=(TextView)view.findViewById(R.id.temperature);
-        humidite=(TextView)view.findViewById(R.id.humidite);
-        pression=(TextView)view.findViewById(R.id.pression);
-
+        temperature = (TextView) view.findViewById(R.id.temperature);
+        humidite = (TextView) view.findViewById(R.id.humidite);
+        pression = (TextView) view.findViewById(R.id.pression);
+        distance = (TextView) view.findViewById(R.id.distance);
 
 
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
 
+        boutonDistance.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                // disable bouton
+                //while 30 sec ou obtenu valeur
+                mqttService.subscribe_distance_value();
+                String value = "";
+                while ("".equals(value)) {
+                    value = mqttService.currentDistanceValue;
+                }
+                Log.d("R", "coucou !!!" + value);
+                distance.setText(value);
+            }
+        });
+
         boutonTemperature.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-               // disable bouton
-                //while 30 sec ou obtenu valeur
                 mqttService.subscribe_atmosphere_temperature();
-                String value="";
-                while ("".equals(value)){
-                    value=mqttService.currentTempValue;
+                String value = "";
+                while ("".equals(value)) {
+                    value = mqttService.currentTempValue;
                 }
                 Log.d("R", "coucou !!!" + value);
+                temperature.setText(value);
             }
         });
 
         boutonHumidite.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                // disable bouton
+                //while 30 sec ou obtenu valeur
+                mqttService.subscribe_atmosphere_humidite();
+                String value = "";
+                while ("".equals(value)) {
+                    value = mqttService.currentHumiditeValue;
+                }
+                Log.d("R", "coucou !!!" + value);
+                humidite.setText(value);
             }
         });
         boutonPression.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                mqttService.subscribe_atmosphere_pression();
+                String value = "";
+                while ("".equals(value)) {
+                    value = mqttService.currentPressionValue;
+                }
+                Log.d("R", "coucou !!!" + value);
+                pression.setText(value);
             }
         });
 
@@ -409,7 +440,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-       /* boule2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        boule2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (boule2.isChecked()) {
@@ -421,7 +452,7 @@ public class HomeFragment extends Fragment {
                 }
 
             }
-        });*/
+        });
 
        /* volumeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             // When Progress value changed.

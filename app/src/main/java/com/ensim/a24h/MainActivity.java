@@ -61,18 +61,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, ScenarioChoicePatternActivity.class));
     }
 
-    //gère le click sur une action de l'ActionBar
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_save:
-                add();
-                return true;
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

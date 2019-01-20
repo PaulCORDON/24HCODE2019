@@ -27,6 +27,8 @@ public class ScenarioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        View view = inflater.inflate(R.layout.activity_scenario_fragment, container, false);
         creer = mListView.findViewById(R.id.creation);
         creer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +36,6 @@ public class ScenarioFragment extends Fragment {
                 startActivity(new Intent(ScenarioFragment.this.getActivity(), ScenarioChoicePatternActivity.class));
             }
         });
-        View view = inflater.inflate(R.layout.activity_scenario_fragment, container, false);
         Scenario scenario = new Scenario();
         mListView = (ListView) view.findViewById(R.id.listview);
 

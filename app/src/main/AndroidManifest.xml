@@ -24,8 +24,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeFragment" />
-        <activity android:name=".DashboardFragment" />
-        <activity android:name=".NotificationFragment"></activity>
+        <activity android:name=".PopUps.PopUpChoix" />
+        <activity android:name=".ScenarioFragment" />
+        <activity android:name=".FavorisFragment" />
+        <activity android:name=".ScenarioChoicePatternActivity" />
+        <activity android:name=".ValueChoiceActivity"></activity>
     </application>
 
 </manifest>

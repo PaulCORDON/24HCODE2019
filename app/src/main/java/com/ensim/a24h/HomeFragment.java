@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         boutonWipe = (Button) view.findViewById(R.id.boutonWipe);
         boutonRainbow = (Button) view.findViewById(R.id.boutonRainbow);
         boutonSerpent = (Button) view.findViewById(R.id.boutonSerpent);
-        //boutonNeige = (Button) view.findViewById(R.id.boutonNeige);
+        boutonNeige = (Button) view.findViewById(R.id.boutonNeige);
         boule1 = (CheckBox) view.findViewById(R.id.checkBox);
         boule2 = (CheckBox) view.findViewById(R.id.checkBox10);
         boule3 = (CheckBox) view.findViewById(R.id.checkBox11);
@@ -81,8 +81,8 @@ public class HomeFragment extends Fragment {
                 }
 
             }
-        });
-        boutonColumn.setOnClickListener(new View.OnClickListener() {
+        });*/
+        /*boutonColumn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
                     //bleu blanc rouge vive la france et vive la république
@@ -161,7 +161,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        /*boutonNeige.setOnClickListener(new View.OnClickListener() {
+        boutonNeige.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 for (String boule : listeBouleCheckees) {
@@ -230,7 +230,7 @@ public class HomeFragment extends Fragment {
 
 
             }
-        });*/
+        });
 
         boule1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

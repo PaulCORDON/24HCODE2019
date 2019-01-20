@@ -1,8 +1,11 @@
 package com.ensim.a24h;
 
+
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +34,7 @@ public class HomeFragment extends Fragment {
     private Button stop;
     private Button previous;
     private Button next;
+    private Button personnaliser;
     private SeekBar seekBarRouge;
     private SeekBar seekBarVert;
     private SeekBar seekBarBleu;
@@ -60,9 +64,9 @@ public class HomeFragment extends Fragment {
         boutonRainbow = (Button) view.findViewById(R.id.boutonRainbow);
         boutonSerpent = (Button) view.findViewById(R.id.boutonSerpent);
         boutonNeige = (Button) view.findViewById(R.id.boutonNeige);
-        seekBarBleu = (SeekBar)view.findViewById(R.id.seekBar4);
-        seekBarVert = (SeekBar)view.findViewById(R.id.seekBar3);
-        seekBarRouge = (SeekBar)view.findViewById(R.id.seekBar2);
+        seekBarBleu = (SeekBar) view.findViewById(R.id.seekBar4);
+        seekBarVert = (SeekBar) view.findViewById(R.id.seekBar3);
+        seekBarRouge = (SeekBar) view.findViewById(R.id.seekBar2);
         boutonChenille = (Button) view.findViewById(R.id.boutonChenille);
         boutonRing = (Button) view.findViewById(R.id.boutonRing);
         boutonColumn = (Button) view.findViewById(R.id.boutonColumn);
@@ -75,14 +79,40 @@ public class HomeFragment extends Fragment {
         boule7 = (CheckBox) view.findViewById(R.id.checkBox15);
         boule8 = (CheckBox) view.findViewById(R.id.checkBox16);
         boule9 = (CheckBox) view.findViewById(R.id.checkBox17);
-        play = (Button)view.findViewById(R.id.play);
-        stop = (Button)view.findViewById(R.id.stop);
-        pause = (Button)view.findViewById(R.id.pause);
-        previous = (Button)view.findViewById(R.id.previous);
-        next = (Button)view.findViewById(R.id.next);
+        play = (Button) view.findViewById(R.id.play);
+        stop = (Button) view.findViewById(R.id.stop);
+        pause = (Button) view.findViewById(R.id.pause);
+        previous = (Button) view.findViewById(R.id.previous);
+        next = (Button) view.findViewById(R.id.next);
+        personnaliser = (Button) view.findViewById(R.id.personnaliser);
 
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
 
+
+        personnaliser.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+
+                Log.d("R", "coucou" + Integer.toString(seekBarRouge.getProgress()));
+                Log.d("V", "coucou" + Integer.toString(seekBarVert.getProgress()));
+                Log.d("B", "coucou" + Integer.toString(seekBarBleu.getProgress()));
+
+                int r = seekBarRouge.getProgress();
+                int g = seekBarVert.getProgress();
+                int b = seekBarBleu.getProgress();
+                for (String boule : listeBouleCheckees) {
+                    mqttService.fill(boule, r, g, b);
+                }
+                r = (r << 16) & 0x00FF0000;
+                g = (g << 8) & 0x0000FF00;
+                b = b & 0x000000FF;
+                int rgb = 0xFF000000 | r | g | b;
+                Log.d("B", "coucou rgb" + rgb);
+                personnaliser.setBackgroundColor(rgb);
+
+
+            }
+        });
 
         boutonRouge.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -412,7 +442,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        
 
         return view;
     }

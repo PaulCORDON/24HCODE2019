@@ -432,7 +432,9 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:max="255"
-            android:progress="1" />
+            android:progress="1"
+            android:progressTint="#FFB80000"
+            android:thumbTint="#FFB80000"/>
 
         <SeekBar
             android:id="@+id/seekBar3"
@@ -441,7 +443,9 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:max="255"
-            android:progress="1" />
+            android:progress="1"
+            android:progressTint="#1ED718"
+            android:thumbTint="#1ED718"/>
 
         <SeekBar
             android:id="@+id/seekBar4"
@@ -450,7 +454,9 @@
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:max="255"
-            android:progress="1" />
+            android:progress="1"
+            android:progressTint="#0628B2"
+            android:thumbTint="#0628B2"/>
 
         <Button
             android:id="@+id/personnaliser"
@@ -460,7 +466,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Personnaliser couleur"
+            android:text="Couleur personnalisée"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.621"

@@ -456,7 +456,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:max="255"
-                    android:progress="1"
+                    android:progress="55"
                     android:progressTint="#FFB80000"
                     android:thumbTint="#FFB80000"
                     app:layout_constraintTop_toBottomOf="@+id/textView11" />

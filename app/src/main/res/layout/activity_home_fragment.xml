@@ -142,17 +142,6 @@
                 android:textSize="24sp" />
 
             <SeekBar
-                android:id="@+id/seekBar4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:max="255"
-                android:progress="1"
-                android:progressTint="#0628B2"
-                android:thumbTint="#0628B2" />
-
-            <SeekBar
                 android:id="@+id/seekBar2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -173,6 +162,17 @@
                 android:progress="1"
                 android:progressTint="#1ED718"
                 android:thumbTint="#1ED718" />
+
+            <SeekBar
+                android:id="@+id/seekBar4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:max="255"
+                android:progress="1"
+                android:progressTint="#0628B2"
+                android:thumbTint="#0628B2" />
 
             <Button
                 android:id="@+id/personnaliser"

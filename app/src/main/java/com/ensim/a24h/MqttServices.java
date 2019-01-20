@@ -16,12 +16,12 @@ import java.nio.charset.StandardCharsets;
 
 public class MqttServices {
 
-    public String currentTempValue;
+    public String currentTempValue="";
     public String currentPressionValue;
     public String currentHumiditeValue;
     public String currentDistanceValue;
     public String currentHumiditeAbsolueValue;
-    
+
 
     MqttClient connection() {
         String broker = "tcp://mpd.lan:1883";
@@ -369,6 +369,7 @@ public class MqttServices {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 System.out.println(new String(message.getPayload()));
+                currentTempValue=new String(message.getPayload());
             }
 
             @Override

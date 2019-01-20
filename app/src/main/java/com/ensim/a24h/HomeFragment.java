@@ -25,6 +25,7 @@ public class HomeFragment extends Fragment {
     private Button boutonNeige;
     private Button boutonRing;
     private Button boutonColumn;
+    private Button boutonChenille;//bouton pour faire une chenille avec toutes les boules sélectionnées
     private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9;
 
     public HomeFragment() {
@@ -90,6 +91,46 @@ public class HomeFragment extends Fragment {
                     mqttService.set_column(boule, 1, 255, 255, 255);
                     mqttService.set_column(boule, 1, 255, 0, 0);
                 }
+
+            }
+        });*/
+        //pour faire un serpent avec les boules entieres
+       /* boutonChenille.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int bouleAEteindre=0;
+                int cpteur=0;
+                for (String boule : listeBouleCheckees) {
+                    mqttService.fill(boule, 128, 0, 128);
+                    try {
+                        Thread.sleep(150);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if(cpteur>2){
+                        mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
+                        bouleAEteindre++;
+
+                    }
+                    cpteur++;
+                }
+
+                mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
+                bouleAEteindre++;
+                try {
+                    Thread.sleep(150);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
+                bouleAEteindre++;
+                try {
+                    Thread.sleep(150);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
+                bouleAEteindre++;
+
 
             }
         });*/

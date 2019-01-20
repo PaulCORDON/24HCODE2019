@@ -1,5 +1,6 @@
 package com.ensim.a24h;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.ensim.a24h.Model.Scenario;
 import com.ensim.a24h.Patern.PatternBrancheRotative;
@@ -65,11 +67,15 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
         boule9 = (CheckBox) findViewById(R.id.checkBox17);
         boule10 = (CheckBox) findViewById(R.id.checkBox18);
         boule11 = (CheckBox) findViewById(R.id.checkBox19);
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
         rainbow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scenario.add(new PatternRainbow(listeBouleCheckees));
+                Toast.makeText(context, "Ajout Rainbow au scenario réussi", duration).show();
+
             }
         });
 
@@ -89,13 +95,17 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
                 } else {
                     scenario.add(new PatternWipe(listeBouleCheckees, seekBarRouge.getProgress(), seekBarVert.getProgress(), seekBarBleu.getProgress(), Integer.parseInt(editText.getText().toString())));
                 }
-
+                Toast.makeText(context, "Ajout Wipe au scenario réussi", duration).show();
             }
         });
         branche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 scenario.add(new PatternBrancheRotative(seekBarRouge.getProgress(), seekBarVert.getProgress(), seekBarBleu.getProgress(), listeBouleCheckees));
+
+                Toast.makeText(context, "Ajout Branche rotative au scenario réussi", duration).show();
+
             }
         });
         colonne.setOnClickListener(new View.OnClickListener() {
@@ -108,12 +118,16 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
                     col = Integer.parseInt(editText.getText().toString());
                 }
                 scenario.add(new PatternColumn(listeBouleCheckees, seekBarRouge.getProgress(), seekBarVert.getProgress(), seekBarBleu.getProgress(), col));
+                Toast.makeText(context, "Ajout colonne au scenario réussi", duration).show();
+
             }
         });
         goutte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scenario.add(new PatternGoutte(seekBarRouge.getProgress(), seekBarVert.getProgress(), seekBarBleu.getProgress()));
+                Toast.makeText(context, "Ajout goutte au scenario réussi", duration).show();
+
             }
         });
         ring.setOnClickListener(new View.OnClickListener() {
@@ -126,12 +140,16 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
                     anneau = Integer.parseInt(editText.getText().toString());
                 }
                 scenario.add(new PatternRing(listeBouleCheckees, seekBarRouge.getProgress(), seekBarVert.getProgress(), seekBarBleu.getProgress(), anneau));
+                Toast.makeText(context, "Ajout anneau au scenario réussi", duration).show();
+
             }
         });
         fill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 scenario.add(new PatternFill(listeBouleCheckees, seekBarRouge.getProgress(), seekBarVert.getProgress(), seekBarBleu.getProgress()));
+                Toast.makeText(context, "Ajout fill au scenario réussi", duration).show();
+
             }
         });
 

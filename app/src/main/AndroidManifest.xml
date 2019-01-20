@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeFragment" />
-        <activity android:name=".PopUps.PopUpChoix" />
         <activity android:name=".ScenarioFragment" />
         <activity android:name=".FavorisFragment" />
         <activity android:name=".ScenarioChoicePatternActivity" />

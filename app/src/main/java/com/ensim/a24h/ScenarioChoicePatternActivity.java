@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
@@ -24,6 +25,7 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
     private SeekBar seekBarBleu;
     private Button boutonexecuter;
     private EditText editText;
+    private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9, boule10, boule11;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,17 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
         seekBarVert =findViewById(R.id.seekBar3);
         seekBarRouge = findViewById(R.id.seekBar2);
         boutonexecuter = findViewById(R.id.executer);
-
+        boule1 = (CheckBox) findViewById(R.id.checkBox);
+        boule2 = (CheckBox) findViewById(R.id.checkBox10);
+        boule3 = (CheckBox) findViewById(R.id.checkBox11);
+        boule4 = (CheckBox) findViewById(R.id.checkBox12);
+        boule5 = (CheckBox) findViewById(R.id.checkBox13);
+        boule6 = (CheckBox) findViewById(R.id.checkBox14);
+        boule7 = (CheckBox) findViewById(R.id.checkBox15);
+        boule8 = (CheckBox) findViewById(R.id.checkBox16);
+        boule9 = (CheckBox) findViewById(R.id.checkBox17);
+        boule10 = (CheckBox) findViewById(R.id.checkBox18);
+        boule11 = (CheckBox) findViewById(R.id.checkBox19);
 
         rainbow.setOnClickListener(new View.OnClickListener() {
             @Override

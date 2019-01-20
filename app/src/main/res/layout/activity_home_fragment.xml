@@ -120,6 +120,7 @@
 
                 <Button
                     android:id="@+id/boutonColumn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -132,8 +133,7 @@
                     app:layout_constraintHorizontal_bias="0.621"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.434"
-                    android:layout_width="match_parent" />
+                    app:layout_constraintVertical_bias="0.434" />
             </LinearLayout>
 
             <TextView

@@ -4,25 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-
-import static com.ensim.a24h.R.menu.navigation;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -40,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("Home", "Homefragmennt");
                     return true;
                 case R.id.navigation_dashboard:
-                    showFragment(new DashboardFragment());
+                    showFragment(new ScenarioFragment());
                     Log.d("dashboard", "dashboardfragmennt");
                     return true;
                 case R.id.navigation_notifications:
-                    showFragment(new NotificationFragment());
+                    showFragment(new FavorisFragment());
                     Log.d("notifications", "notificationsfragmennt");
                     return true;
             }
@@ -67,6 +55,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void add(){
+        showFragment(new ScenarioFragment());
+        startActivity(new Intent(MainActivity.this, ScenarioChoicePatternActivity.class));
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //ajoute les entrées de menu_test à l'ActionBar
+        getMenuInflater().inflate(R.menu.actionbar, menu);
+
+        return true;
+    }
+
+
 
     private void showFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();

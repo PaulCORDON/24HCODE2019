@@ -10,4 +10,24 @@ public class Scenario extends ArrayList<IPattern>{
             pattern.execute();
         }
     }
+
+    public String getChoix() {
+        return choix;
+    }
+
+    public void setChoix(String choix) {
+        this.choix = choix;
+    }
+
+    private String choix;
+
+    public ArrayList<IPattern> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<IPattern> list) {
+        this.list = list;
+    }
+
+    private ArrayList<IPattern> list;
 }

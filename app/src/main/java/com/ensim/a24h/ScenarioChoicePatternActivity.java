@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 import com.ensim.a24h.Model.Scenario;
+import com.ensim.a24h.Patern.PatternRainbow;
+import com.ensim.a24h.Patern.PatternWipe;
 import com.ensim.a24h.Patern.PatternFill;
 import com.ensim.a24h.Patern.PatternGoutte;
 import com.ensim.a24h.Patern.PatternRing;
@@ -51,27 +53,26 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
         rainbow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "rainbow");
-                startActivity(i);
+                scenario.add(new PatternRainbow(/*todo liste boules*/));
             }
         });
 
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "wipe");
-                startActivity(i);
-                finish();
+                if("".equals(editText.getText())){
+                    scenario.add(new PatternWipe(/*todo liste boules*/,seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress(),3000));
+                }
+                else{
+                    scenario.add(new PatternWipe(/*todo liste boules*/,seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress(),editText.getText()));
+                }
+
             }
         });
         branche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "brancherotative");
-                startActivity(i);
+                scenario.add(new PatternWipe(seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress(),/*todo liste boules*/));
             }
         });
         colonne.setOnClickListener(new View.OnClickListener() {

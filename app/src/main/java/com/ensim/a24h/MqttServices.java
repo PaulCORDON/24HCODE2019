@@ -16,6 +16,13 @@ import java.nio.charset.StandardCharsets;
 
 public class MqttServices {
 
+    public String currentTempValue;
+    public String currentPressionValue;
+    public String currentHumiditeValue;
+    public String currentDistanceValue;
+    public String currentHumiditeAbsolueValue;
+    
+
     MqttClient connection() {
         String broker = "tcp://mpd.lan:1883";
         String clientId = "POLO";
@@ -324,7 +331,29 @@ public class MqttServices {
 
     //Fonction pour le capteur de distance status
     public void subscribe_distance_status() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("distance/status");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
     //Fonction pour le capteur atmosphérique

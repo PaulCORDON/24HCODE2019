@@ -65,9 +65,12 @@ public class HomeFragment extends Fragment {
         boutonRainbow = (Button) view.findViewById(R.id.boutonRainbow);
         boutonSerpent = (Button) view.findViewById(R.id.boutonSerpent);
         boutonNeige = (Button) view.findViewById(R.id.boutonNeige);
-        seekBarBleu = (SeekBar) view.findViewById(R.id.seekBar4);
-        seekBarVert = (SeekBar) view.findViewById(R.id.seekBar3);
-        seekBarRouge = (SeekBar) view.findViewById(R.id.seekBar2);
+        seekBarBleu = (SeekBar)view.findViewById(R.id.seekBar4);
+        seekBarVert = (SeekBar)view.findViewById(R.id.seekBar3);
+        seekBarRouge = (SeekBar)view.findViewById(R.id.seekBar2);
+        boutonChenille = (Button) view.findViewById(R.id.boutonChenille);
+        boutonRing = (Button) view.findViewById(R.id.boutonRing);
+        boutonColumn = (Button) view.findViewById(R.id.boutonColumn);
         boule1 = (CheckBox) view.findViewById(R.id.checkBox);
         boule2 = (CheckBox) view.findViewById(R.id.checkBox10);
         boule3 = (CheckBox) view.findViewById(R.id.checkBox11);
@@ -129,7 +132,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        /*boutonRing.setOnClickListener(new View.OnClickListener() {
+        boutonRing.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
                     //bleu blanc rouge vive la france et vive la république
@@ -139,8 +142,8 @@ public class HomeFragment extends Fragment {
                 }
 
             }
-        });*/
-        /*boutonColumn.setOnClickListener(new View.OnClickListener() {
+        });
+        boutonColumn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {
                     //bleu blanc rouge vive la france et vive la république
@@ -150,12 +153,12 @@ public class HomeFragment extends Fragment {
                 }
 
             }
-        });*/
+        });
         //pour faire un serpent avec les boules entieres
-       /* boutonChenille.setOnClickListener(new View.OnClickListener() {
+        boutonChenille.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                int bouleAEteindre=0;
-                int cpteur=0;
+                int bouleAEteindre = 0;
+                int cpteur = 0;
                 for (String boule : listeBouleCheckees) {
                     mqttService.fill(boule, 128, 0, 128);
                     try {
@@ -163,7 +166,7 @@ public class HomeFragment extends Fragment {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    if(cpteur>2){
+                    if (cpteur > 2) {
                         mqttService.fill(listeBouleCheckees.get(bouleAEteindre), 0, 0, 0);
                         bouleAEteindre++;
 
@@ -190,7 +193,7 @@ public class HomeFragment extends Fragment {
 
 
             }
-        });*/
+        });
         boutonVert.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 for (String boule : listeBouleCheckees) {

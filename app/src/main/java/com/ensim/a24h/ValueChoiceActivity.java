@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ensim.a24h.Model.Scenario;
+import com.ensim.a24h.Patern.PatternRainbow;
 import com.ensim.a24h.Patern.PatternWipe;
 
 import java.util.ArrayList;
@@ -87,6 +88,10 @@ public class ValueChoiceActivity extends AppCompatActivity {
                 {
                     PatternWipe pwipe = new PatternWipe(listeBouleCheckees, Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()), Integer.parseInt(duree.getText().toString()));
                     scene.add(pwipe);
+                }
+                if (scenario.equals("rainbow"))
+                {
+                    scene.add(new PatternRainbow(listeBouleCheckees));
                 }
                 i.putExtra("nom", nom.getText().toString());
                 startActivity(i);

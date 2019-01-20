@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
     private TextView distance;
 
     private Button boutonChenille;//bouton pour faire une chenille avec toutes les boules sélectionnées
-    private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9;
+    private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9, boule10, boule11;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -95,6 +95,8 @@ public class HomeFragment extends Fragment {
         boule7 = (CheckBox) view.findViewById(R.id.checkBox15);
         boule8 = (CheckBox) view.findViewById(R.id.checkBox16);
         boule9 = (CheckBox) view.findViewById(R.id.checkBox17);
+        boule10 = (CheckBox) view.findViewById(R.id.checkBox18);
+        boule11 = (CheckBox) view.findViewById(R.id.checkBox19);
         play = (Button) view.findViewById(R.id.play);
         stop = (Button) view.findViewById(R.id.stop);
         pause = (Button) view.findViewById(R.id.pause);
@@ -561,6 +563,34 @@ public class HomeFragment extends Fragment {
                 if (!boule9.isChecked()) {
                     listeBouleCheckees.remove("Laumio_D454DB");
                     mqttService.fill("Laumio_D454DB", 0, 0, 0);
+                }
+
+            }
+        });
+
+        boule10.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (boule10.isChecked()) {
+                    listeBouleCheckees.add("Laumio_107DA8");
+                }
+                if (!boule10.isChecked()) {
+                    listeBouleCheckees.remove("Laumio_107DA8");
+                    mqttService.fill("Laumio_107DA8", 0, 0, 0);
+                }
+
+            }
+        });
+
+        boule11.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (boule11.isChecked()) {
+                    listeBouleCheckees.add("Laumio_88813D");
+                }
+                if (!boule11.isChecked()) {
+                    listeBouleCheckees.remove("Laumio_88813D");
+                    mqttService.fill("Laumio_88813D", 0, 0, 0);
                 }
 
             }

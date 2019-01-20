@@ -16,6 +16,13 @@ import java.nio.charset.StandardCharsets;
 
 public class MqttServices {
 
+    public String currentTempValue;
+    public String currentPressionValue;
+    public String currentHumiditeValue;
+    public String currentDistanceValue;
+    public String currentHumiditeAbsolueValue;
+    
+
     MqttClient connection() {
         String broker = "tcp://mpd.lan:1883";
         String clientId = "POLO";
@@ -35,7 +42,7 @@ public class MqttServices {
     }
 
 
-    void advertise(){
+    public void advertise(){
         String topic        = "laumio/all/advertise";
         int qos             = 2;
         MqttClient sampleClient = this.connection();
@@ -61,7 +68,7 @@ public class MqttServices {
         }
     }
 
-    void set_pixel(String nomLaumio, int numLed, int r, int v, int b) {
+    public void set_pixel(String nomLaumio, int numLed, int r, int v, int b) {
 
         String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
@@ -99,7 +106,7 @@ public class MqttServices {
     /*Change la couleur d’un anneau.
     Les 4 octets du message sont le numéro de l’anneau
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
-    void set_ring(String nomLaumio, int numAnneau, int r, int v, int b) {
+    public void set_ring(String nomLaumio, int numAnneau, int r, int v, int b) {
 
         String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
@@ -136,7 +143,7 @@ public class MqttServices {
     /*Change la couleur d’une colonne.
     Les 4 octets du message sont le numéro de la colonne
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
-    void set_column(String nomLaumio,int numCol, int r, int v, int b) {
+    public void set_column(String nomLaumio,int numCol, int r, int v, int b) {
 
         String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
@@ -173,7 +180,7 @@ public class MqttServices {
     /*Démarre l’animation de remplissage progressif avec une couleur et une durée.
     Les 4 octets du message sont les composantes rouge, vert, bleu de la couleur (0 à 255)
     suivies de la durée.*/
-    void color_wipe(String nomLaumio,int r, int v, int b, int duree) {
+    public void color_wipe(String nomLaumio,int r, int v, int b, int duree) {
 
         String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
@@ -209,7 +216,7 @@ public class MqttServices {
 
     // Démarre l’animation arc-en - ciel.
     // Le contenu du message est ignoré.
-    void animate_rainbow(String s) {
+    public void animate_rainbow(String s) {
 
         String topic        = "laumio/"+s+"/json";
         int qos             = 2;
@@ -243,7 +250,7 @@ public class MqttServices {
 
     // Change la couleur de toutes les leds.
     // Les 3 octets du message sont les composantes rouge, vert, bleu de la couleur (0 à 255)
-    void fill(String s, int r, int v, int b) {
+    public void fill(String s, int r, int v, int b) {
 
         String topic        = "laumio/"+s+"/json";
         int qos             = 2;
@@ -281,12 +288,12 @@ public class MqttServices {
     // !!!!!!!!!!!Fonctions pour les capteurs!!!!!!!!!!!!!!!!!!
 
     //Fonction pour la telecommande
-    void subscribe_telecommande(/*nom de la touche*/) {
+    public void subscribe_telecommande(/*nom de la touche*/) {
 
     }
 
     //Fonction pour le capteur de presence state
-    void subscribe_presence_state() {
+    public void subscribe_presence_state() {
 
     }
 
@@ -296,7 +303,7 @@ public class MqttServices {
     }
 
     //Fonction pour le capteur de distance value
-    void subscribe_distance_value() {
+    public void subscribe_distance_value() {
         MqttClient client = this.connection();
         try {
             client.subscribe("distance/value");
@@ -323,13 +330,35 @@ public class MqttServices {
     }
 
     //Fonction pour le capteur de distance status
-    void subscribe_distance_status() {
+    public void subscribe_distance_status() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("distance/status");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
     //Fonction pour le capteur atmosphérique
 
-    void subscribe_atmosphere_temperature() {
+    public void subscribe_atmosphere_temperature() {
         MqttClient client = this.connection();
         try {
             client.subscribe("atmosphere/temperature");
@@ -356,7 +385,7 @@ public class MqttServices {
     }
 
 
-    void subscribe_atmosphere_pression() {
+    public void subscribe_atmosphere_pression() {
         MqttClient client = this.connection();
         try {
             client.subscribe("atmosphere/pression");
@@ -382,7 +411,7 @@ public class MqttServices {
         });
     }
 
-    void subscribe_atmosphere_humidite() {
+    public void subscribe_atmosphere_humidite() {
         MqttClient client = this.connection();
         try {
             client.subscribe("atmosphere/humidite");
@@ -408,7 +437,7 @@ public class MqttServices {
         });
     }
 
-    void subscribe_atmosphere_humidite_absolue() {
+    public void subscribe_atmosphere_humidite_absolue() {
         MqttClient client = this.connection();
         try {
             client.subscribe("atmosphere/humidite_absolue");
@@ -436,7 +465,7 @@ public class MqttServices {
     }
 
 
-    void subscribe_status_advertise() {
+    public void subscribe_status_advertise() {
     }
 }
 

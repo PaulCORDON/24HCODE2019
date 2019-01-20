@@ -9,9 +9,10 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
 
 public class MqttServices {
 
@@ -61,30 +62,34 @@ public class MqttServices {
     }
 
     void set_pixel(String nomLaumio, int numLed, int r, int v, int b) {
+
         String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
+        // Convert numbers array into JSON string.;
+        String st = "{command:'set_pixel','led':"+numLed+",rgb:["+r+", "+v+", "+b+"]}";
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = new JSONObject(st);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 MqttMessage message = new MqttMessage();
-                JsonObject event = new JsonObject();
-                event.addProperty("command", "set_pixel");
-                event.addProperty("led", numLed);
-                String s ="["+r+","+v+","+b+"]";
-                event.addProperty("rgb", s);
-                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
-                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
+                message.setPayload(jsonObj.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+jsonObj.toString());
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
-                System.out.println("Message published");
                 sampleClient.disconnect();
                 System.out.println("Disconnected");
-            } catch (MqttException me) {
-                System.out.println("reason " + me.getReasonCode());
-                System.out.println("msg " + me.getMessage());
-                System.out.println("loc " + me.getLocalizedMessage());
-                System.out.println("cause " + me.getCause());
-                System.out.println("excep " + me);
+                //System.exit(0);
+            } catch(MqttException me) {
+                System.out.println("reason "+me.getReasonCode());
+                System.out.println("msg "+me.getMessage());
+                System.out.println("loc "+me.getLocalizedMessage());
+                System.out.println("cause "+me.getCause());
+                System.out.println("excep "+me);
                 me.printStackTrace();
             }
         }
@@ -95,24 +100,28 @@ public class MqttServices {
     Les 4 octets du message sont le numéro de l’anneau
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
     void set_ring(String nomLaumio, int numAnneau, int r, int v, int b) {
+
         String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
+        // Convert numbers array into JSON string.;
+        String st = "{command:'set_ring','ring':"+numAnneau+",rgb:["+r+", "+v+", "+b+"]}";
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = new JSONObject(st);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 MqttMessage message = new MqttMessage();
-                JsonObject event = new JsonObject();
-                event.addProperty("command", "set_ring");
-                event.addProperty("ring", "numAnneau");
-                String s ="["+r+","+v+","+b+"]";
-                event.addProperty("rgb", s);
-                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
-                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
+                message.setPayload(jsonObj.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+jsonObj.toString());
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
-                System.out.println("Message published");
                 sampleClient.disconnect();
                 System.out.println("Disconnected");
+                //System.exit(0);
             } catch(MqttException me) {
                 System.out.println("reason "+me.getReasonCode());
                 System.out.println("msg "+me.getMessage());
@@ -128,22 +137,25 @@ public class MqttServices {
     Les 4 octets du message sont le numéro de la colonne
     suivi des composantes rouge, vert, bleu de la couleur (0 à 255)*/
     void set_column(String nomLaumio,int numCol, int r, int v, int b) {
-        String topic        = "laumio/"+nomLaumio+"json";
+
+        String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
+        // Convert numbers array into JSON string.;
+        String st = "{command:'set_column','column':"+numCol+",rgb:["+r+", "+v+", "+b+"]}";
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = new JSONObject(st);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 MqttMessage message = new MqttMessage();
-                JsonObject event = new JsonObject();
-                event.addProperty("command", "set_column");
-                event.addProperty("column", "numCol");
-                String s ="["+r+","+v+","+b+"]";
-                event.addProperty("rgb", s);
-                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
-                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
+                message.setPayload(jsonObj.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+jsonObj.toString());
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
-                System.out.println("Message published");
                 sampleClient.disconnect();
                 System.out.println("Disconnected");
                 //System.exit(0);
@@ -162,23 +174,25 @@ public class MqttServices {
     Les 4 octets du message sont les composantes rouge, vert, bleu de la couleur (0 à 255)
     suivies de la durée.*/
     void color_wipe(String nomLaumio,int r, int v, int b, int duree) {
+
         String topic        = "laumio/"+nomLaumio+"/json";
         int qos             = 2;
+        // Convert numbers array into JSON string.;
+        String st = "{command:'color_wipe','duration':"+duree+",rgb:["+r+", "+v+", "+b+"]}";
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = new JSONObject(st);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 MqttMessage message = new MqttMessage();
-                JsonObject event = new JsonObject();
-                event.addProperty("command", "color_wipe");
-                event.addProperty("duration", duree);
-                String s ="["+r+","+v+","+b+"]";
-                event.addProperty("rgb", s);
-                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
-                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
-                System.out.println("Published Message: " + event.toString());
+                message.setPayload(jsonObj.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+jsonObj.toString());
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
-                System.out.println("Message published");
                 sampleClient.disconnect();
                 System.out.println("Disconnected");
                 //System.exit(0);
@@ -233,22 +247,22 @@ public class MqttServices {
 
         String topic        = "laumio/"+s+"/json";
         int qos             = 2;
-
-        JsonObject event = new JsonObject();
-        event.addProperty("command", "fill");
-        String rvb ="["+r+","+v+","+b+"]";
-        event.addProperty("rgb", rvb);
-        event.addProperty("command", "fill");
-        System.out.println("Published Message: " + event.toString());
+        // Convert numbers array into JSON string.;
+        String st = "{command:'fill',rgb:["+r+", "+v+", "+b+"]}";
         MqttClient sampleClient = this.connection();
         if(sampleClient!=null){
             try {
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = new JSONObject(st);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 MqttMessage message = new MqttMessage();
-                message.setPayload(event.toString().getBytes(StandardCharsets.UTF_8));
-                System.out.println("Publishing message: "+event.toString().getBytes(StandardCharsets.UTF_8));
+                message.setPayload(jsonObj.toString().getBytes(StandardCharsets.UTF_8));
+                System.out.println("Publishing message: "+jsonObj.toString());
                 message.setQos(qos);
                 sampleClient.publish(topic, message);
-                System.out.println("Message published");
                 sampleClient.disconnect();
                 System.out.println("Disconnected");
                 //System.exit(0);
@@ -261,11 +275,6 @@ public class MqttServices {
                 me.printStackTrace();
             }
         }
-    }
-
-    // Renvoie un message sur le topic laumio/status/advertise contenant son nom.
-    void discover() {
-
     }
 
 
@@ -288,7 +297,29 @@ public class MqttServices {
 
     //Fonction pour le capteur de distance value
     void subscribe_distance_value() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("distance/value");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
     //Fonction pour le capteur de distance status
@@ -299,37 +330,113 @@ public class MqttServices {
     //Fonction pour le capteur atmosphérique
 
     void subscribe_atmosphere_temperature() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("atmosphere/temperature");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
 
     void subscribe_atmosphere_pression() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("atmosphere/pression");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
     void subscribe_atmosphere_humidite() {
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("atmosphere/humidite");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
+            }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
+
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
     }
 
     void subscribe_atmosphere_humidite_absolue() {
-        String topic = "atmosphere/humidite_absolue";
-
-
-    }
-
-    void subscribe_status_advertise() {
-        String topic = "laumio/status/discover";
-        MqttClient sampleClient = this.connection();
-        if (sampleClient != null) {
-
-            try {
-                sampleClient.subscribeWithResponse(topic);
-                System.out.println(sampleClient.subscribeWithResponse(topic));
-            } catch (MqttException e) {
-                e.printStackTrace();
+        MqttClient client = this.connection();
+        try {
+            client.subscribe("atmosphere/humidite_absolue");
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                System.out.println(new String(message.getPayload()));
             }
 
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                System.out.println("fail");
+            }
 
-        }
+            @Override
+            public void connectionLost(Throwable ex) {
+
+                ex.printStackTrace();
+            }
+        });
+
+    }
+
+
+    void subscribe_status_advertise() {
     }
 }
+

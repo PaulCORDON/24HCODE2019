@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,8 @@ public class HomeFragment extends Fragment {
     private SeekBar seekBarRouge;
     private SeekBar seekBarVert;
     private SeekBar seekBarBleu;
+    private SeekBar volumeControl;
+
     private Button boutonChenille;//bouton pour faire une chenille avec toutes les boules sélectionnées
     private CheckBox boule1, boule2, boule3, boule4, boule5, boule6, boule7, boule8, boule9;
 
@@ -57,6 +60,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_home_fragment, container, false);
         final MqttServices mqttService = new MqttServices();
+        final MPDServices musicPlayer = new MPDServices();
         boutonRouge = (Button) view.findViewById(R.id.boutonRouge);
         boutonVert = (Button) view.findViewById(R.id.boutonVert);
         boutonBleu = (Button) view.findViewById(R.id.boutonBleu);
@@ -88,6 +92,11 @@ public class HomeFragment extends Fragment {
 
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
 
+        play.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.play();
+            }
+        });
 
         personnaliser.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -111,6 +120,30 @@ public class HomeFragment extends Fragment {
                 personnaliser.setBackgroundColor(rgb);
 
 
+            }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.stop();
+            }
+        });
+
+        pause.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.pause();
+            }
+        });
+
+        previous.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.previousMusic();
+            }
+        });
+
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                musicPlayer.nextMusic();
             }
         });
 
@@ -350,6 +383,27 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        volumeControl.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            // When Progress value changed.
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+                musicPlayer.setVol(progressValue);
+            }
+
+            // Notification that the user has started a touch gesture.
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                Log.i("", "Started tracking seekbar");
+            }
+
+            // Notification that the user has finished a touch gesture
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Log.i("", "Stopped tracking seekbar");
+            }
+        });
+
         boule3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

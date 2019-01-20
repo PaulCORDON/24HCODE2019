@@ -35,6 +35,9 @@ public class HomeFragment extends Fragment {
     private Button stop;
     private Button previous;
     private Button next;
+    private Button boutonTemperature;
+    private Button boutonPression;
+    private Button boutonHumidite;
     private Button personnaliser;
     private SeekBar seekBarRouge;
     private SeekBar seekBarVert;
@@ -74,6 +77,9 @@ public class HomeFragment extends Fragment {
         boutonChenille = (Button) view.findViewById(R.id.boutonChenille);
         boutonRing = (Button) view.findViewById(R.id.boutonRing);
         boutonColumn = (Button) view.findViewById(R.id.boutonColumn);
+        boutonTemperature = (Button) view.findViewById(R.id.boutonTemperature);
+        boutonPression = (Button) view.findViewById(R.id.boutonPresion);
+        boutonHumidite = (Button) view.findViewById(R.id.boutonHumidite);
         boule1 = (CheckBox) view.findViewById(R.id.checkBox);
         boule2 = (CheckBox) view.findViewById(R.id.checkBox10);
         boule3 = (CheckBox) view.findViewById(R.id.checkBox11);
@@ -91,6 +97,25 @@ public class HomeFragment extends Fragment {
         personnaliser = (Button) view.findViewById(R.id.personnaliser);
 
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
+
+        boutonTemperature.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+               // disable bouton
+                //while 30 sec ou obtenu valeur
+            }
+        });
+
+        boutonHumidite.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
+        boutonPression.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
 
         play.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

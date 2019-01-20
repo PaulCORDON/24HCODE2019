@@ -5,7 +5,7 @@ import com.ensim.a24h.Patern.IPattern;
 import java.util.ArrayList;
 
 public class Scenario extends ArrayList<IPattern>{
-    void execute(){
+    public void execute(){
         for(IPattern pattern : this){
             pattern.execute();
         }

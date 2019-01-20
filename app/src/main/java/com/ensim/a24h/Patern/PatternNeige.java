@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class PatternNeige implements IPattern{
     ArrayList<String> listeBoules = new ArrayList<String>();
 
-    PatternNeige(ArrayList<String> s){
+    public PatternNeige(ArrayList<String> s){
         listeBoules = s;
     }
 

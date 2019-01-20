@@ -16,6 +16,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ensim.a24h.Model.Scenario;
+import com.ensim.a24h.Patern.PatternBrancheRotative;
+import com.ensim.a24h.Patern.PatternFill;
+import com.ensim.a24h.Patern.PatternGoutte;
+import com.ensim.a24h.Patern.PatternNeige;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -40,6 +46,8 @@ public class HomeFragment extends Fragment {
     private Button boutonHumidite;
     private Button boutonDistance;
     private Button personnaliser;
+    private Button boutonBleublancrouge;
+    private Button boutonRandom;
     private SeekBar seekBarRouge;
     private SeekBar seekBarVert;
     private SeekBar seekBarBleu;
@@ -86,6 +94,8 @@ public class HomeFragment extends Fragment {
         boutonPression = (Button) view.findViewById(R.id.boutonPresion);
         boutonHumidite = (Button) view.findViewById(R.id.boutonHumidite);
         boutonDistance = (Button) view.findViewById(R.id.boutonDistance);
+        boutonBleublancrouge=(Button)view.findViewById(R.id.boutonScenar2);
+        boutonRandom=(Button)view.findViewById(R.id.boutonScenar1);
         boule1 = (CheckBox) view.findViewById(R.id.checkBox);
         boule2 = (CheckBox) view.findViewById(R.id.checkBox10);
         boule3 = (CheckBox) view.findViewById(R.id.checkBox11);
@@ -107,6 +117,26 @@ public class HomeFragment extends Fragment {
         humidite = (TextView) view.findViewById(R.id.humidite);
         pression = (TextView) view.findViewById(R.id.pression);
         distance = (TextView) view.findViewById(R.id.distance);
+
+        PatternGoutte goutteBleu = new PatternGoutte(0,0,255);
+        PatternGoutte goutteBlanc = new PatternGoutte(255,255,255);
+        PatternGoutte goutteRouge = new PatternGoutte(255,0,0);
+        final Scenario bleuBlancRouge = new Scenario();
+        bleuBlancRouge.add(goutteBleu);
+        bleuBlancRouge.add(goutteBlanc);
+        bleuBlancRouge.add(goutteRouge);
+
+        ArrayList<String> l = new ArrayList<String>();
+        l.add("Laumio_1D9486");
+        l.add("Laumio_104F03");
+        l.add("Laumio_10805F");
+        PatternFill pfill = new PatternFill(l,255,255,0);
+        PatternBrancheRotative pbranche = new PatternBrancheRotative(0,255,255,l);
+        PatternNeige pneige = new PatternNeige(l);
+        final Scenario random = new Scenario();
+        random.add(pfill);
+        random.add(pbranche);
+        random.add(pneige);
 
 
         final ArrayList<String> listeBouleCheckees = new ArrayList<String>();
@@ -320,6 +350,18 @@ public class HomeFragment extends Fragment {
                 for (String boule : listeBouleCheckees) {
                     mqttService.animate_rainbow(boule);
                 }
+
+            }
+        });
+        boutonBleublancrouge.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                bleuBlancRouge.execute();
+
+            }
+        });
+        boutonRandom.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                random.execute();
 
             }
         });

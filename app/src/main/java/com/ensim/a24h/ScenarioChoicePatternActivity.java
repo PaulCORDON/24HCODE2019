@@ -10,6 +10,13 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 import com.ensim.a24h.Model.Scenario;
+import com.ensim.a24h.Patern.PatternRainbow;
+import com.ensim.a24h.Patern.PatternWipe;
+import com.ensim.a24h.Patern.PatternFill;
+import com.ensim.a24h.Patern.PatternGoutte;
+import com.ensim.a24h.Patern.PatternRing;
+
+import java.util.ArrayList;
 
 public class ScenarioChoicePatternActivity extends AppCompatActivity {
 
@@ -30,7 +37,7 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scenario_choice_pattern);
-        Scenario scenario = new Scenario();
+        final Scenario scenario = new Scenario();
         rainbow = findViewById(R.id.rainbow);
         wipe = findViewById(R.id.wipe);
         branche = findViewById(R.id.branche);
@@ -58,59 +65,66 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
         rainbow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "rainbow");
-                startActivity(i);
+                scenario.add(new PatternRainbow(/*todo liste boules*/));
             }
         });
 
         wipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "wipe");
-                startActivity(i);
-                finish();
+                if("".equals(editText.getText())){
+                    scenario.add(new PatternWipe(/*todo liste boules*/,seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress(),3000));
+                }
+                else{
+                    scenario.add(new PatternWipe(/*todo liste boules*/,seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress(),editText.getText()));
+                }
+
             }
         });
         branche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "brancherotative");
-                startActivity(i);
+                scenario.add(new PatternWipe(seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress(),/*todo liste boules*/));
             }
         });
         colonne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "column");
-                startActivity(i);
+                int col;
+                if("".equals(editText.getText()))
+                {
+                    col=1;
+                }
+                else{
+                    col = Integer.parseInt(editText.getText().toString());
+                }
+                scenario.add(new PatternRing(l,seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress(),col));
             }
         });
         goutte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "goutte");
-                startActivity(i);
+                scenario.add(new PatternGoutte(seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress()));
             }
         });
         ring.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "ring");
-                startActivity(i);
+                int anneau;
+                if("".equals(editText.getText()))
+                {
+                    anneau=1;
+                }
+                else{
+                    anneau = Integer.parseInt(editText.getText().toString());
+                }
+                scenario.add(new PatternRing(l,seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress(),anneau));
             }
         });
         fill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ScenarioChoicePatternActivity.this, ValueChoiceActivity.class);
-                i.putExtra("type", "fill");
-                startActivity(i);
+                scenario.add(new PatternFill(l,seekBarRouge.getProgress(),seekBarVert.getProgress(),seekBarBleu.getProgress()));
             }
         });
 

@@ -1,6 +1,7 @@
 package com.ensim.a24h;
 
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -119,12 +120,12 @@ public class ValueChoiceActivity extends AppCompatActivity {
                 }
                 if (scenario.equals("column"))
                 {
-                    PatternColumn pcol = new PatternColumn(listeBouleCheckees, Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()),0);
+                    PatternColumn pcol = new PatternColumn(listeBouleCheckees, Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()),Integer.parseInt(column.getText().toString()));
                     scene.add(pcol);
                 }
                 if (scenario.equals("ring"))
                 {
-                    PatternRing pring = new PatternRing(listeBouleCheckees, Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()),0);
+                    PatternRing pring = new PatternRing(listeBouleCheckees, Integer.parseInt(r.getText().toString()), Integer.parseInt(v.getText().toString()), Integer.parseInt(b.getText().toString()),Integer.parseInt(ring.getText().toString()));
                     scene.add(pring);
                 }
 
@@ -136,7 +137,21 @@ public class ValueChoiceActivity extends AppCompatActivity {
 
         if (scenario.equals("wipe"))
         {
-
+            ring.setVisibility(View.GONE);
+            column.setVisibility(View.GONE);
+            r.setVisibility(View.VISIBLE);
+            v.setVisibility(View.VISIBLE);
+            b.setVisibility(View.VISIBLE);
+            duree.setVisibility(View.VISIBLE);
+            boule1.setVisibility(View.VISIBLE);
+            boule2.setVisibility(View.VISIBLE);
+            boule3.setVisibility(View.VISIBLE);
+            boule4.setVisibility(View.VISIBLE);
+            boule5.setVisibility(View.VISIBLE);
+            boule6.setVisibility(View.VISIBLE);
+            boule7.setVisibility(View.VISIBLE);
+            boule8.setVisibility(View.VISIBLE);
+            boule9.setVisibility(View.VISIBLE);
         }
 
         if (scenario.equals("rainbow"))

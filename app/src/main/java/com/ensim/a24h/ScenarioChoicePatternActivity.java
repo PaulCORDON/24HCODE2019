@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.SeekBar;
 
 import com.ensim.a24h.Model.Scenario;
 
@@ -17,7 +19,11 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
     private Button goutte;
     private Button ring;
     private Button fill;
-
+    private SeekBar seekBarRouge;
+    private SeekBar seekBarVert;
+    private SeekBar seekBarBleu;
+    private Button boutonexecuter;
+    private EditText editText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +36,11 @@ public class ScenarioChoicePatternActivity extends AppCompatActivity {
         goutte = findViewById(R.id.goutte);
         ring = findViewById(R.id.edti);
         fill = findViewById(R.id.fill);
+        editText =findViewById(R.id.editText);
+        seekBarBleu = findViewById(R.id.seekBar4);
+        seekBarVert =findViewById(R.id.seekBar3);
+        seekBarRouge = findViewById(R.id.seekBar2);
+        boutonexecuter = findViewById(R.id.executer);
 
 
         rainbow.setOnClickListener(new View.OnClickListener() {
